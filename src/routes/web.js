@@ -1,4 +1,4 @@
-import express from "express";
+const express = require("express");
 import homepageController from "../controllers/homepageController";
 
 let router = express.Router();
