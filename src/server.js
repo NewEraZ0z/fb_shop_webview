@@ -1,5 +1,5 @@
 require('dotenv').config();
-// import express from "express";
+
 const express = require("express");
 const configViewEngine = require("./config/viewEngine");
 const initWebRoutes = require("./routes/web");
