@@ -4,7 +4,7 @@ const request = require("request");
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-
+const WEBVIEW_URL = process.env.WEBVIEW_URL;
 let getHomepage = (req, res) => {
     return res.render("homepage.ejs");
 };
@@ -86,6 +86,31 @@ let handleMessage = (sender_psid, received_message) => {
         response = {
             "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
         }
+
+     if (received_message.text.toLowerCase() === "commande") {
+
+           response = {
+               "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"button",
+        "text":"welcom to west food",
+        "buttons":[
+          {
+            "type":"web_url",
+            "url": WEBVIEW_URL,
+            "title":"Order Now",
+            "webview_heights_ration": "tall",
+            "messenger_extension": true, 
+              
+          },
+        ]
+      }
+    }
+           }
+         
+     }
+        
     } else if (received_message.attachments) {
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
@@ -161,8 +186,14 @@ let callSendAPI = (sender_psid, response) => {
         }
     });
 };
+
+let getWebViewPage = (req, res) =>{
+    return res.render(food.ejs)
+};
+
 module.exports = {
     getHomepage: getHomepage,
     getWebhook: getWebhook,
-    postWebhook: postWebhook
+    postWebhook: postWebhook,
+    getWebViewPage: getWebViewPage
 };
