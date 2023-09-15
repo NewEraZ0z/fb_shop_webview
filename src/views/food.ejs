@@ -1,1 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(self 'https://fantasyzoom22.github.io/regTeg'), microphone=()">
+  <title>Document</title>
+</head>
+<style>
+body {
+  margin-top: 10px;
+  padding: 0;
+  font-size: 18px;
+  color: var(--tg-theme-text-color);
+  background: black;
+}
 
+.container {
+  max-width: 340px;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 200px 200px 200px;
+}
+
+  .img {
+    width: 150px;
+    display: block;
+    margin: 0 auto; /* Center the image horizontally */
+  }
+
+  .item {
+    /* Your existing item styles */
+  text-align: center; /* Center the item content */
+  position: relative;
+  }
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  background: rgb(248, 168, 24);
+  border-radius: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+
+  transition: background .2s linear;
+}
+
+.btn:hover {
+  background: lightgreen;
+}
+
+.usercard {
+  text-align: center;
+}
+
+ .notification {
+      position: absolute;
+      top: 0;
+      right: 15px;
+      background-color: red;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 50%;
+      font-size: 14px;
+      display: none;
+    }
+  
+.remove-btn {
+  display: none;
+}
+
+
+
+.item-price {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #fff;
+}
+.item-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* Add this to your existing CSS */
+.total-container {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+  font-size: 20px;
+  color: yellow;
+}
+
+  /* Add media queries for responsiveness */
+    @media screen and (max-width: 480px) {
+      .container {
+        max-width: 100%; /* Adjust the container width for smaller screens */
+      }
+
+      .inner {
+        grid-template-columns: 1fr 1fr 1fr; /* Stack items vertically on smaller screens */
+        grid-template-rows: repeat(6, auto); /* Adjust the number of rows as needed */
+      }
+
+      .item {
+        margin: 10px auto; /* Center items horizontally */
+      }
+
+      .img {
+        width: 100%; /* Make images responsive */
+      }
+    }
+</style>
+<body>
+  <div class="container">
+    <div class="inner">
+      <div class="item">
+        <div class="item-title">Tako</div>
+        <span class="item-price" id="item-price1">Price: $15</span> <!-- Updated price -->
+        <img src="https://res.cloudinary.com/dsjjtnudl/image/upload/v1692470283/TG-Foods/Tako_148_qb6ayw.png" alt="" class="img">
+        <button class="btn" id="btn1">Add</button>
+                <button class="btn remove-btn" id="removeBtn1" >-</button>
+                <span class="notification" id="notification1" ></span>
+      </div>
+      <div class="item">
+       <div class="item-title">Hotdog</div>
+      <span class="item-price" id="item-price2">Price: $10</span> 
+        <img src="https://res.cloudinary.com/dsjjtnudl/image/upload/v1692470281/TG-Foods/Hotdog_148_iddyls.png" alt="" class="img">
+        <button class="btn" id="btn2">Add</button>
+                <button class="btn remove-btn" id="removeBtn2" >-</button>
+                <span class="notification" id="notification2" ></span>
+      </div>
+      <div class="item">
+       <div class="item-title">Burger</div>
+      <span class="item-price" id="item-price3">Price: $10</span> 
+        <img src="https://res.cloudinary.com/dsjjtnudl/image/upload/v1692470282/TG-Foods/Burger_148_vm6adu.png" alt="" class="img">
+        <button class="btn" id="btn3">Add</button>
+                <button class="btn remove-btn" id="removeBtn3" >-</button>
+                <span class="notification" id="notification3" ></span>
+      </div>
+      <div class="item">
+       <div class="item-title">Fries</div>
+      <span class="item-price" id="item-price4">Price: $10</span> 
+        <img src="https://res.cloudinary.com/dsjjtnudl/image/upload/v1692470285/TG-Foods/Fries_148_jxcly5.png" alt="" class="img">
+        <button class="btn" id="btn4">Add</button>
+                <button class="btn remove-btn" id="removeBtn4" >-</button>
+                <span class="notification" id="notification4" ></span>
+      </div>
+      <div class="item">
+        <div class="item-title">Pizza</div>
+        <span class="item-price" id="item-price5">Price: $10</span> 
+        <img src="https://res.cloudinary.com/dsjjtnudl/image/upload/v1692470283/TG-Foods/Pizza_148_jej5pz.png" alt="" class="img">
+        <button class="btn" id="btn5">Add</button>
+                <button class="btn remove-btn" id="removeBtn5" >-</button>
+                <span class="notification" id="notification5" ></span>
+      </div>
+      <div class="item">
+      <div class="item-title">Coke</div>
+      <span class="item-price" id="item-price6">Price: $5</span> 
+        <img src="https://res.cloudinary.com/dsjjtnudl/image/upload/v1692470282/TG-Foods/Coke_148_ajethz.png" alt="" class="img">
+        <button class="btn" id="btn6">Add</button>
+                <button class="btn remove-btn" id="removeBtn6" >-</button>
+                <span class="notification" id="notification6" ></span>
+      </div>
+    </div>
+  </div>
+  <div class="total-container">
+  <p>Total Price: دج<span id="total-price">0</span></p>
+</div>
+
+  <div class="usercard" id="usercard">
+    
+  </div>
+
+<script>
+    let tg = window.Telegram.WebApp;
+
+tg.expand();
+
+tg.MainButton.textColor = '#FFFFFF';
+tg.MainButton.color = '#2cab37';
+
+ let itemPrices = {
+      1: 15,
+      2: 10,
+      3: 10,
+      4: 10,
+      5: 10,
+      6: 05,
+      // Add more entries for other items with their respective prices
+    };
+    
+
+let item = "";
+let quantities = {}; // Object to store quantities for each item
+
+let btn1 = document.getElementById("btn1");
+let btn2 = document.getElementById("btn2");
+let btn3 = document.getElementById("btn3");
+let btn4 = document.getElementById("btn4");
+let btn5 = document.getElementById("btn5");
+let btn6 = document.getElementById("btn6");
+let removeBtn1 = document.getElementById("removeBtn1");
+let removeBtn2 = document.getElementById("removeBtn2");
+let removeBtn3 = document.getElementById("removeBtn3");
+let removeBtn4 = document.getElementById("removeBtn4");
+let removeBtn5 = document.getElementById("removeBtn5");
+let removeBtn6 = document.getElementById("removeBtn6");
+// Initialize quantities to 0 for all items
+quantities = {
+  1: 0,
+  2: 0,
+  3: 0,
+  4: 0,
+  5: 0,
+  6: 0,
+
+  // Add more entries for other items
+};
+
+// Add this at the end of your existing JavaScript code
+
+function calculateTotalPrices() {
+  let totalPrice = 0;
+  
+  for (let itemId in quantities) {
+    totalPrice += itemPrices[itemId] * quantities[itemId];
+  }
+  
+  let totalElement = document.getElementById("total-price");
+  totalElement.innerText = totalPrice;
+  
+  // Hide the total container if the total price is zero
+  let totalContainer = document.querySelector(".total-container");
+  if (totalPrice === 0) {
+    totalContainer.style.display = "none";
+  } else {
+    totalContainer.style.display = "block";
+  }
+}
+
+
+  function updatePrice(itemId) {
+    let itemPriceElement = document.getElementById(`item-price${itemId}`);
+    let totalItemPrice = itemPrices[itemId] * quantities[itemId]; // Calculate the total price for the item
+
+    if (quantities[itemId] === 0) {
+      // Revert to the original price when quantity is zero
+      itemPriceElement.innerText = `Price: $${itemPrices[itemId]}`;
+    } else {
+      itemPriceElement.innerText = `Price: $${totalItemPrice}`; // Update the displayed price
+    }
+  }
+
+    function updateNotification(itemId) {
+      let notification = document.getElementById(`notification${itemId}`); // Get the notification span for the corresponding item
+      notification.innerText = quantities[itemId]; // Display the new quantity value in the notification
+    }
+let foods = {}; 
+    
+btn1.addEventListener("click", function(){
+  quantities[1]++; // Increase the quantity for item 1
+  updatePrice(1); // Increase the price for item 1
+  updateNotification(1); // Update the notification with the new quantity
+
+  foods[1] = {
+    title: "Tako",
+    quantity: quantities[1],
+    price: itemPrices[1]
+  };
+
+  if (tg.MainButton.isVisible) {
+    tg.MainButton.show();
+ 
+  }
+  else {
+    tg.MainButton.setText(`Вы выбрали товар 1! Количество: ${quantities[1]}`);
+    item = "1";
+    tg.MainButton.show();
+  }
+
+     if (quantities[1] >= 0) {
+    removeBtn1.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
+     notification1.style.display = "inline"; // Show the notification when the quantity is greater than 0
+  }
+  calculateTotalPrices();
+});
+
+btn2.addEventListener("click", function(){
+  quantities[2]++; // Increase the quantity for item 2
+  updateNotification(2); // Update the notification with the new quantity
+  updatePrice(2); // Increase the price for item 1
+
+  foods[2] = {
+    title: "Hotdog",
+    quantity: quantities[2],
+    price: itemPrices[2]
+  };
+
+  if (tg.MainButton.isVisible) {
+    tg.MainButton.show();
+  
+  }
+  else {
+    tg.MainButton.setText(`Вы выбрали товар 2! Количество: ${quantities[2]}`);
+    item = "2";
+    tg.MainButton.show();
+  }
+     if (quantities[2] >= 0) {
+    removeBtn2.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
+    notification2.style.display = "inline"; // Show the notification when the quantity is greater than 0
+  }
+  calculateTotalPrices();
+});
+
+
+btn3.addEventListener("click", function(){
+  quantities[3]++; // Increase the quantity for item 1
+  updateNotification(3); // Update the notification with the new quantity
+  updatePrice(3); // Increase the price for item 1
+
+  foods[3] = {
+    title: "Burger",
+    quantity: quantities[3],
+    price: itemPrices[3]
+  };
+
+  if (tg.MainButton.isVisible) {
+    tg.MainButton.show();
+  }
+  else {
+    tg.MainButton.setText(`Вы выбрали товар 3! Количество: ${quantities[3]}`);
+    item = "3";
+    tg.MainButton.show();
+  }
+     if (quantities[3] >= 0) {
+    removeBtn3.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
+    notification3.style.display = "inline"; // Show the notification when the quantity is greater than 0
+  }
+  calculateTotalPrices();
+});
+
+btn4.addEventListener("click", function(){
+  quantities[4]++; // Increase the quantity for item 2
+  updateNotification(4); // Update the notification with the new quantity
+  updatePrice(4); // Increase the price for item 1
+
+  foods[4] = {
+    title: "Fries",
+    quantity: quantities[4],
+    price: itemPrices[4]
+  };
+
+  if (tg.MainButton.isVisible) {
+    tg.MainButton.show();
+  }
+  else {
+    tg.MainButton.setText(`Вы выбрали товар 4! Количество: ${quantities[4]}`);
+    item = "4";
+    tg.MainButton.show();
+  }
+   if (quantities[4] >= 0) {
+    removeBtn4.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
+    notification4.style.display = "inline"; // Show the notification when the quantity is greater than 0
+  }
+  calculateTotalPrices();
+});
+
+btn5.addEventListener("click", function(){
+  quantities[5]++; // Increase the quantity for item 1
+  updateNotification(5); // Update the notification with the new quantity
+  updatePrice(5); // Increase the price for item 1
+
+  foods[5] = {
+    title: "Pizza",
+    quantity: quantities[5],
+    price: itemPrices[5]
+  };
+
+  if (tg.MainButton.isVisible) {
+    tg.MainButton.show();
+  }
+  else {
+    //tg.MainButton.setText(`Вы выбрали товар 5! Количество: ${quantities[5]}`);
+    item = "5";
+    tg.MainButton.show();
+  }
+     if (quantities[5] >= 0) {
+    removeBtn5.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
+    notification5.style.display = "inline"; // Show the notification when the quantity is greater than 0
+  }
+  calculateTotalPrices();
+});
+
+btn6.addEventListener("click", function(){
+  quantities[6]++; // Increase the quantity for item 2
+  updateNotification(6); // Update the notification with the new quantity
+  updatePrice(6); // Increase the price for item 1
+
+foods[6] = {
+    title: "Coke",
+    quantity: quantities[6],
+    price: itemPrices[6]
+  };
+    
+  if (tg.MainButton.isVisible) {
+    tg.MainButton.show();
+  }
+  else {
+    //tg.MainButton.setText(`Вы выбрали товар 6! Количество: ${quantities[6]}`);
+    item = "6";
+    tg.MainButton.show();
+  }
+       if (quantities[6] >= 0) {
+    removeBtn6.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
+    notification6.style.display = "inline"; // Show the notification when the quantity is greater than 0
+  }
+  calculateTotalPrices();
+});
+// Repeat the same for other items
+
+removeBtn1.addEventListener("click", function(){
+  if (quantities[1] > 0) {
+    quantities[1]--; // Decrease the quantity for item 1
+     updatePrice(1); // Update the displayed price for item 1
+     updateNotification(1); // Update the notification with the new quantity
+  }
+
+  if (quantities[1] === 0) {
+    removeBtn1.style.display = "none"; // Hide the "Remove" button when the quantity is equal to 0
+    notification1.style.display = "none"; // Hide the notification when the quantity is equal to 0
+  }
+  calculateTotalPrices();
+});
+
+removeBtn2.addEventListener("click", function(){
+  if (quantities[2] > 0) {
+    quantities[2]--; // Decrease the quantity for item 1
+    updateNotification(2); // Update the notification with the new quantity
+    updatePrice(2); // Increase the price for item 1
+  }
+
+  if (quantities[2] === 0) {
+    removeBtn2.style.display = "none"; // Hide the "Remove" button when the quantity is equal to 0
+     notification2.style.display = "none"; // Hide the notification when the quantity is equal to 0
+  }
+  calculateTotalPrices();
+});
+removeBtn3.addEventListener("click", function(){
+  if (quantities[3] > 0) {
+    quantities[3]--; // Decrease the quantity for item 1
+    updateNotification(3); // Update the notification with the new quantity
+    updatePrice(3); // Increase the price for item 1
+  }
+
+  if (quantities[3] === 0) {
+    removeBtn3.style.display = "none"; // Hide the "Remove" button when the quantity is equal to 0
+     notification3.style.display = "none"; // Hide the notification when the quantity is equal to 0
+  }
+  calculateTotalPrices();
+});
+
+removeBtn4.addEventListener("click", function(){
+  if (quantities[4] > 0) {
+    quantities[4]--; // Decrease the quantity for item 1
+    updateNotification(4); // Update the notification with the new quantity
+    updatePrice(4); // Increase the price for item 1
+  }
+
+  if (quantities[4] === 0) {
+    removeBtn4.style.display = "none"; // Hide the "Remove" button when the quantity is equal to 0
+     notification4.style.display = "none"; // Hide the notification when the quantity is equal to 0
+  }
+  calculateTotalPrices();
+});
+
+removeBtn5.addEventListener("click", function(){
+  if (quantities[5] > 0) {
+    quantities[5]--; // Decrease the quantity for item 1
+    updateNotification(5); // Update the notification with the new quantity
+     updatePrice(5); // Increase the price for item 1
+  }
+
+  if (quantities[5] === 0) {
+    removeBtn5.style.display = "none"; // Hide the "Remove" button when the quantity is equal to 0
+     notification5.style.display = "none"; // Hide the notification when the quantity is equal to 0
+  }
+  calculateTotalPrices();
+});
+
+removeBtn6.addEventListener("click", function(){
+  if (quantities[6] > 0) {
+    quantities[6]--; // Decrease the quantity for item 1
+    updateNotification(6); // Update the notification with the new quantity
+     updatePrice(6); // Increase the price for item 1
+  }
+
+  if (quantities[6] === 0) {
+    removeBtn6.style.display = "none"; // Hide the "Remove" button when the quantity is equal to 0
+     notification6.style.display = "none"; // Hide the notification when the quantity is equal to 0
+  }
+  calculateTotalPrices();
+});
+
+
+
+
+// Telegram.WebApp.onEvent("mainButtonClicked", function(){
+//   tg.sendData({ item: item, quantity: quantities[item] }); // Send both item and quantity data to Telegram
+// });
+
+function updateNotification(itemId) {
+  let notification = document.getElementById(`notification${itemId}`); // Get the notification span for the corresponding item
+  notification.innerText = quantities[itemId]; // Display the new quantity value in the notification
+}
+
+// Initial update of all notifications when the page is loaded
+for (let itemId in quantities) {
+  updateNotification(itemId);
+}
+
+// Initial calculation of total prices when the page loads
+calculateTotalPrices();
+
+
+let usercard = document.getElementById("usercard");
+
+let p = document.createElement("p");
+
+p.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
+
+usercard.appendChild(p);
+
+fetch('/set-up-webview', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(foods),
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data.message); // You can handle the server's response here
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+
+</script>
+</body>
+</html> 
