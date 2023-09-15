@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Permissions-Policy" content="geolocation=(self 'https://fantasyzoom22.github.io/regTeg'), microphone=()">
@@ -191,13 +190,7 @@ body {
   </div>
 
 <script>
-    let tg = window.Telegram.WebApp;
-
-tg.expand();
-
-tg.MainButton.textColor = '#FFFFFF';
-tg.MainButton.color = '#2cab37';
-
+  
  let itemPrices = {
       1: 15,
       2: 10,
@@ -287,15 +280,6 @@ btn1.addEventListener("click", function(){
     price: itemPrices[1]
   };
 
-  if (tg.MainButton.isVisible) {
-    tg.MainButton.show();
- 
-  }
-  else {
-    tg.MainButton.setText(`Вы выбрали товар 1! Количество: ${quantities[1]}`);
-    item = "1";
-    tg.MainButton.show();
-  }
 
      if (quantities[1] >= 0) {
     removeBtn1.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
@@ -315,15 +299,7 @@ btn2.addEventListener("click", function(){
     price: itemPrices[2]
   };
 
-  if (tg.MainButton.isVisible) {
-    tg.MainButton.show();
-  
-  }
-  else {
-    tg.MainButton.setText(`Вы выбрали товар 2! Количество: ${quantities[2]}`);
-    item = "2";
-    tg.MainButton.show();
-  }
+ 
      if (quantities[2] >= 0) {
     removeBtn2.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification2.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -343,14 +319,7 @@ btn3.addEventListener("click", function(){
     price: itemPrices[3]
   };
 
-  if (tg.MainButton.isVisible) {
-    tg.MainButton.show();
-  }
-  else {
-    tg.MainButton.setText(`Вы выбрали товар 3! Количество: ${quantities[3]}`);
-    item = "3";
-    tg.MainButton.show();
-  }
+ 
      if (quantities[3] >= 0) {
     removeBtn3.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification3.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -369,14 +338,6 @@ btn4.addEventListener("click", function(){
     price: itemPrices[4]
   };
 
-  if (tg.MainButton.isVisible) {
-    tg.MainButton.show();
-  }
-  else {
-    tg.MainButton.setText(`Вы выбрали товар 4! Количество: ${quantities[4]}`);
-    item = "4";
-    tg.MainButton.show();
-  }
    if (quantities[4] >= 0) {
     removeBtn4.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification4.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -395,14 +356,7 @@ btn5.addEventListener("click", function(){
     price: itemPrices[5]
   };
 
-  if (tg.MainButton.isVisible) {
-    tg.MainButton.show();
-  }
-  else {
-    //tg.MainButton.setText(`Вы выбрали товар 5! Количество: ${quantities[5]}`);
-    item = "5";
-    tg.MainButton.show();
-  }
+
      if (quantities[5] >= 0) {
     removeBtn5.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification5.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -421,14 +375,7 @@ foods[6] = {
     price: itemPrices[6]
   };
     
-  if (tg.MainButton.isVisible) {
-    tg.MainButton.show();
-  }
-  else {
-    //tg.MainButton.setText(`Вы выбрали товар 6! Количество: ${quantities[6]}`);
-    item = "6";
-    tg.MainButton.show();
-  }
+ 
        if (quantities[6] >= 0) {
     removeBtn6.style.display = "inline-block"; // Show the "Remove" button when the quantity is greater than 0
     notification6.style.display = "inline"; // Show the notification when the quantity is greater than 0
@@ -521,12 +468,6 @@ removeBtn6.addEventListener("click", function(){
 });
 
 
-
-
-// Telegram.WebApp.onEvent("mainButtonClicked", function(){
-//   tg.sendData({ item: item, quantity: quantities[item] }); // Send both item and quantity data to Telegram
-// });
-
 function updateNotification(itemId) {
   let notification = document.getElementById(`notification${itemId}`); // Get the notification span for the corresponding item
   notification.innerText = quantities[itemId]; // Display the new quantity value in the notification
@@ -540,29 +481,6 @@ for (let itemId in quantities) {
 // Initial calculation of total prices when the page loads
 calculateTotalPrices();
 
-
-let usercard = document.getElementById("usercard");
-
-let p = document.createElement("p");
-
-p.innerText = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
-
-usercard.appendChild(p);
-
-fetch('/set-up-webview', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(foods),
-})
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data.message); // You can handle the server's response here
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
 
 </script>
 </body>
