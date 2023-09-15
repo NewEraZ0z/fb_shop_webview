@@ -1,6 +1,6 @@
 const express = require("express");
-import homepageController from "../controllers/homepageController";
-
+//import homepageController from "../controllers/homepageController";
+const homepageController = require("../controllers/homepageController");
 let router = express.Router();
 
 //init all web routes
