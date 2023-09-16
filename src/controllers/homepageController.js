@@ -97,13 +97,13 @@ let handleMessage = (sender_psid, received_message) => {
         "text":"welcom to west food",
         "buttons":[
           {
-            "type":"web_url",
+            "type": "web_url",
             "url": WEBVIEW_URL,
-            "title":"Order Now",
-            "webview_heights_ration": "tall",
+            "title": "Order Now",
+            "webview_height_ration": "tall",
             "messenger_extension": true, 
               
-          },
+          }
         ]
       }
     }
