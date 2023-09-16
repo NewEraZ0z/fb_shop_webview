@@ -87,27 +87,27 @@ let handleMessage = (sender_psid, received_message) => {
             "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
         };
 
-     if (received_message.text.toLowerCase() === "commande") {
+     if (received_message.text.toLowerCase() === "webview") {
 
            response = {
                "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"button",
-        "text":"welcom to west food",
-        "buttons":[
-          {
-            "type": "web_url",
-            "url": WEBVIEW_URL,
-            "title": "Order Now",
-            "webview_height_ration": "tall",
-            "messenger_extension": true, 
+               "type":"template",
+               "payload":{
+                         "template_type":"button",
+                         "text":"welcom to west food",
+               "buttons":[
+                          {
+                          "type": "web_url",
+                          "url": WEBVIEW_URL,
+                          "title": "Order Now",
+                          "webview_height_ration": "tall",
+                          "messenger_extension": true
               
-          }
-        ]
-      }
-    }
-           }
+                             },
+                           ]
+                         }
+                   }
+              };
          
      }
         
