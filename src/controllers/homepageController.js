@@ -97,7 +97,7 @@ let handleMessage = (sender_psid, received_message) => {
                                "buttons":[
                                     {
                                      "type":"web_url",
-                                     "url": "https://webview-fd-order.onrender.com/webview",
+                                     "url": WEBVIEW_URL,
                                      "title":"Order Now",
                                      "webview_height_ratio": "tall",
                                      "messenger_extension": true
