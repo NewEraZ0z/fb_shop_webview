@@ -86,6 +86,7 @@ let handleMessage = (sender_psid, received_message) => {
         response = {
             "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
         };
+    }
 
      if (received_message.text.toLowerCase() === "webview") {
 
@@ -109,7 +110,6 @@ let handleMessage = (sender_psid, received_message) => {
                    }
               };
          
-     }
         
     } else if (received_message.attachments) {
         // Get the URL of the message attachment
