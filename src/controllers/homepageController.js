@@ -98,9 +98,7 @@ let handleMessage = (sender_psid, received_message) => {
                                     {
                                      "type":"web_url",
                                      "url": WEBVIEW_URL,
-                                     "title":"Order Now",
-                                     "webview_height_ratio": "tall",
-                                     "messenger_extension": "true"
+                                     "title":"Order Now"
                                     },
           
                                         ]
