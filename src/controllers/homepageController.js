@@ -79,38 +79,35 @@ let postWebhook = (req, res) => {
 let handleMessage = (sender_psid, received_message) => {
     let response;
 
-    // Checks if the message contains text
+   // Checks if the message contains text
     if (received_message.text) {
         // Create the payload for a basic text message, which
         // will be added to the body of our request to the Send API
         response = {
             "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
         };
-    
-
-     if (received_message.text.toLowerCase() === "webview") {
-
-           response = {
-               "attachment":{
-               "type":"template",
-               "payload":{
-                         "template_type":"button",
-                         "text":"welcom to west food",
-               "buttons":[
-                          {
-                          "type": "web_url",
-                          "url": WEBVIEW_URL,
-                          "title": "Order Now",
-                          "webview_height_ratio": "tall",
-                          "messenger_extension": true
-              
-                             },
-                           ]
-                         }
-                   }
-              };
-         
         
+        if (received_message.text.toLowerCase() === "webview") {
+           response = {
+                       "attachment":{
+                           "type":"template",
+                           "payload":{
+                               "template_type":"button",
+                               "text":"What do you want to do next?",
+                               "buttons":[
+                                    {
+                                     "type":"web_url",
+                                     "url": WEBVIEW_URL,
+                                     "title":"Order Now",
+                                     "webview_height_ratio": "tall",
+                                     "messenger_extension": true
+                                    },
+          
+                                        ]
+                                  }
+                       }
+             }; 
+        }
     } else if (received_message.attachments) {
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
@@ -144,6 +141,7 @@ let handleMessage = (sender_psid, received_message) => {
     // Send the response message
     callSendAPI(sender_psid, response);
 };
+
 
 // Handles messaging_postbacks events
 let handlePostback = (sender_psid, received_postback) => {
