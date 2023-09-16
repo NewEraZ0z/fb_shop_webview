@@ -188,7 +188,7 @@ let callSendAPI = (sender_psid, response) => {
 };
 
 let getWebViewPage = (req, res) => {
-    return res.render(food.ejs);
+    return res.render("food.ejs");
 };
 
 
