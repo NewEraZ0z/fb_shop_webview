@@ -100,7 +100,7 @@ let handleMessage = (sender_psid, received_message) => {
                                      "url": WEBVIEW_URL,
                                      "title":"Order Now",
                                      "messenger_extensions": "true",
-                                     "webview_height_ratio": "full",
+                                     "webview_height_ratio": "compact",
                                     },
           
                                         ]
