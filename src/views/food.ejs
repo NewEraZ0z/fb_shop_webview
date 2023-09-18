@@ -15,37 +15,17 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'Messenger'));
 
-let psid; // Declare psid as a global variable
 
 window.extAsyncInit = function() {
   // the Messenger Extensions JS SDK is done loading 
   MessengerExtensions.getContext('269582959293477', 
     function success(thread_context){
       // success
-    psid = thread_context.psid; // Store PSID as a global variable
-    document.getElementById("psid").value= thread_context.psid; // Update the hidden input field if needed
-    },
-    function error(err){
-      // error
-      console.log(err);
-    }
-  );
-};
+   // Store PSID as a global variable
+    const psid = document.getElementById("psid").value= thread_context.psid; // Update the hidden input field if needed
 
-
-//function handleSaveBtn(){
-//MessengerExtensions.requestCloseBrowser(function success() {
-// webview closed
-//}, function error(err) {
-// an error occurred
-// console.log(err)
-//});
-
-//}
-
-function handleSaveBtn(psid) { 
-  // Assuming you have a server endpoint to send the 'foods' data to.
-  const serverEndpoint = '/setup-webview';
+//begin
+ const serverEndpoint = '/setup-webview';
 
   // Prepare the data to send to the server
   const requestData = {
@@ -70,7 +50,27 @@ function handleSaveBtn(psid) {
       // Handle errors
       console.error(error);
     });
+//end
+    },
+    function error(err){
+      // error
+      console.log(err);
+    }
+  );
+};
 
+
+//function handleSaveBtn(){
+//MessengerExtensions.requestCloseBrowser(function success() {
+// webview closed
+//}, function error(err) {
+// an error occurred
+// console.log(err)
+//});
+
+//}
+
+function handleSaveBtn() { 
 MessengerExtensions.requestCloseBrowser(function success() {
 // webview closed
 }, function error(err) {
