@@ -309,7 +309,8 @@ function calculateTotalPrices() {
     }
 let foods = {}; 
     
-btn1.addEventListener("click", function(){
+btn1.addEventListener("click", function(event){
+  event.preventDefault();
   quantities[1]++; // Increase the quantity for item 1
   updatePrice(1); // Increase the price for item 1
   updateNotification(1); // Update the notification with the new quantity
