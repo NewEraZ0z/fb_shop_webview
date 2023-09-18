@@ -15,15 +15,15 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'Messenger'));
 
-let psid = null; // Initialize as null
+
 
 window.extAsyncInit = function() {
   // the Messenger Extensions JS SDK is done loading 
   MessengerExtensions.getContext('269582959293477', 
   function success(thread_context){
     // success
-      psid = thread_context.psid; // Set the global 'psid' variable
-      document.getElementById("psid").value = psid; // Update the hidden input field if needed
+     
+      document.getElementById("psid").value = thread_context.psid;; // Update the hidden input field if needed
   },
   function error(err){
     // error
@@ -46,16 +46,11 @@ function handleSaveBtn() {
   // Assuming you have a server endpoint to send the 'foods' data to.
   const serverEndpoint = '/setup-webview';
 
- // Check if 'psid' has been set
-  if (psid === null) {
-    console.log("PSID has not been retrieved yet.");
-    return;
-  }
 
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: psid,
+    psid: "6553688128054279",
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
