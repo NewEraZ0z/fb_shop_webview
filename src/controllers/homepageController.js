@@ -189,10 +189,20 @@ let getWebViewPage = (req, res) => {
     return res.render("food.ejs");
 };
 
+let handleWebView = (req, res) => {
+    console.log(req.body);
+    let response =  {
+        "text": "Exellent !! nous avons Recus votre Commande"
+    };
+    
+    callSendAPI(req.body.psid, response);
+    return res.redirect("/")
+}
 
 module.exports = {
     getHomepage: getHomepage,
     getWebhook: getWebhook,
     postWebhook: postWebhook,
     getWebViewPage: getWebViewPage,
+    handleWebView: handleWebView,
 };
