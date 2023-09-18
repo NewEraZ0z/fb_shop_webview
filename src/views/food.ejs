@@ -6,6 +6,40 @@
   <meta http-equiv="Permissions-Policy" content="geolocation=(self 'https://fantasyzoom22.github.io/regTeg'), microphone=()">
   <title>Document</title>
 </head>
+<script>
+(function(d, s, id){
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'Messenger'));
+
+window.extAsyncInit = function() {
+  // the Messenger Extensions JS SDK is done loading 
+  MessengerExtensions.getContext('269582959293477', 
+  function success(thread_context){
+    // success
+    document.getElementById("psid").value= thread_context.psid;
+  },
+  function error(err){
+    // error
+      console.log(err);
+  }
+);
+};
+
+function handleSaveBtn(){
+
+     MessengerExtensions.requestCloseBrowser(function success() {
+  // webview closed
+}, function error(err) {
+  // an error occurred
+     console.log(err)
+});
+
+}
+</script>
 <style>
 body {
   margin-top: 10px;
@@ -129,8 +163,9 @@ body {
     }
 </style>
 <body>
+<form action="/setup-webview" method="post">
   <div class="container">
-    <div class="inner">
+    <div class="inner" >
       <div class="item">
         <div class="item-title">Tako</div>
         <span class="item-price" id="item-price1">Price: $15</span> <!-- Updated price -->
@@ -188,7 +223,12 @@ body {
   <div class="usercard" id="usercard">
     
   </div>
-
+<input type="text" hidden name="psid" id="psid">
+<div>
+<br>
+<button type="submit" onclick="handleSaveBtn()">Envoyer</button>
+</div>
+</form>
 <script>
   
  let itemPrices = {
