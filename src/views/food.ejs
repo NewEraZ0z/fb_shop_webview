@@ -15,41 +15,22 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'Messenger'));
 
-let psid; // Declare psid as a global variable
+//let psid; // Declare psid as a global variable
 
 window.extAsyncInit = function() {
   // the Messenger Extensions JS SDK is done loading 
   MessengerExtensions.getContext('269582959293477', 
     function success(thread_context){
       // success
-      psid = thread_context.psid; // Store PSID as a global variable
+    const PSID = thread_context.psid; // Store PSID as a global variable
       document.getElementById("psid").value = thread_context.psid; // Update the hidden input field if needed
-    },
-    function error(err){
-      // error
-      console.log(err);
-    }
-  );
-};
-
-
-//function handleSaveBtn(){
-//MessengerExtensions.requestCloseBrowser(function success() {
-// // webview closed
-//}, function error(err) {
-// // an error occurred
-//  console.log(err)
-//});
-
-//}
-
-function handleSaveBtn(psid) { 
-  // Assuming you have a server endpoint to send the 'foods' data to.
+//begin 
+ // Assuming you have a server endpoint to send the 'foods' data to.
   const serverEndpoint = '/setup-webview';
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: psid, // Use the PSID passed as a parameter
+    psid: PSID, // Use the PSID passed as a parameter
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
@@ -81,7 +62,31 @@ function handleSaveBtn(psid) {
       console.log(err);
     }
   );
-}
+
+
+//end
+    },
+    function error(err){
+      // error
+      console.log(err);
+    }
+  );
+};
+
+
+//function handleSaveBtn(){
+//MessengerExtensions.requestCloseBrowser(function success() {
+// // webview closed
+//}, function error(err) {
+// // an error occurred
+//  console.log(err)
+//});
+
+//}
+
+//function handleSaveBtn(psid) { 
+ 
+//}
 </script>
 <style>
 body {
@@ -206,7 +211,7 @@ body {
     }
 </style>
 <body>
-<form  method="post">
+<form  action="/setup-webview" method="post">
   <div class="container">
     <div class="inner" >
       <div class="item">
