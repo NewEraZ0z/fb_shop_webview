@@ -196,7 +196,7 @@ let handleWebView = (req, res) => {
     };
     
     callSendAPI(req.body.psid, response);
-    //return res.redirect("/");
+    return res.redirect("/");
 };
 
 module.exports = {
