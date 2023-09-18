@@ -192,11 +192,11 @@ let getWebViewPage = (req, res) => {
 let handleWebView = (req, res) => {
     console.log(req.body);
     let response =  {
-        "text": "Exellent !! nous avons Recus votre Commande"
+        "text": 'Exellent !! nous avons Recus votre Commande'
     };
     
     callSendAPI(req.body.psid, response);
-    //return res.redirect("/");
+    return res.redirect("/");
 };
 
 module.exports = {
