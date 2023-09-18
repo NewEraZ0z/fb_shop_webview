@@ -16,13 +16,14 @@
 }(document, 'script', 'Messenger'));
 
 
+let psid; // Declare psid as a global variable
 
 window.extAsyncInit = function() {
   // the Messenger Extensions JS SDK is done loading 
   MessengerExtensions.getContext('269582959293477', 
   function success(thread_context){
     // success
-     
+      psid = thread_context.psid; // Store PSID as a global variable
       document.getElementById("psid").value = thread_context.psid; // Update the hidden input field if needed
   },
   function error(err){
@@ -50,7 +51,7 @@ function handleSaveBtn() {
 
   // Prepare the data to send to the server
   const requestData = {
-    psid:  document.getElementById("psid").value,
+    psid: psid,
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
