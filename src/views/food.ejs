@@ -23,7 +23,7 @@ window.extAsyncInit = function() {
   function success(thread_context){
     // success
      
-      document.getElementById("psid").value = thread_context.psid;; // Update the hidden input field if needed
+      document.getElementById("psid").value = thread_context.psid; // Update the hidden input field if needed
   },
   function error(err){
     // error
@@ -50,7 +50,7 @@ function handleSaveBtn() {
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: "6553688128054279",
+    psid:  document.getElementById("psid").value,
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
