@@ -49,7 +49,7 @@ function handleSaveBtn(psid) { // Pass psid as a parameter
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: psid, // Use the PSID passed as a parameter
+    psid: JSON.stringify(psid), // Use the PSID passed as a parameter
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
