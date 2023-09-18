@@ -29,16 +29,57 @@ window.extAsyncInit = function() {
 );
 };
 
-function handleSaveBtn(){
+//function handleSaveBtn(){
 
-     MessengerExtensions.requestCloseBrowser(function success() {
-  // webview closed
-}, function error(err) {
-  // an error occurred
-     console.log(err)
-});
+  //MessengerExtensions.requestCloseBrowser(function success() {
+ // // webview closed
+//}, function error(err) {
+//  // an error occurred
+ //    console.log(err)
+//});
 
 }
+
+function handleSaveBtn() {
+  // Assuming you have a server endpoint to send the 'foods' data to.
+  const serverEndpoint = '/setup-webview';
+
+  // Prepare the data to send to the server
+  const requestData = {
+    psid: document.getElementById("psid").value,
+    foods: foods, // Assuming 'foods' is an object with item data as you've defined
+  };
+
+  // Make an HTTP POST request to the server
+  fetch(serverEndpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the response from the server as needed
+      console.log(data);
+    })
+    .catch((error) => {
+      // Handle errors
+      console.error(error);
+    });
+
+  // Close the webview when the request is initiated
+  MessengerExtensions.requestCloseBrowser(
+    function success() {
+      // Webview closed
+    },
+    function error(err) {
+      // An error occurred while closing the webview
+      console.log(err);
+    }
+  );
+}
+
 </script>
 <style>
 body {
@@ -310,7 +351,7 @@ function calculateTotalPrices() {
 let foods = {}; 
     
 btn1.addEventListener("click", function(event){
-  event.preventDefault();
+  event.preventDefault(); //prevent button to redirect
   quantities[1]++; // Increase the quantity for item 1
   updatePrice(1); // Increase the price for item 1
   updateNotification(1); // Update the notification with the new quantity
@@ -329,7 +370,8 @@ btn1.addEventListener("click", function(event){
   calculateTotalPrices();
 });
 
-btn2.addEventListener("click", function(){
+btn2.addEventListener("click", function(event){
+event.preventDefault();
   quantities[2]++; // Increase the quantity for item 2
   updateNotification(2); // Update the notification with the new quantity
   updatePrice(2); // Increase the price for item 1
@@ -349,7 +391,8 @@ btn2.addEventListener("click", function(){
 });
 
 
-btn3.addEventListener("click", function(){
+btn3.addEventListener("click", function(event){
+  event.preventDefault();
   quantities[3]++; // Increase the quantity for item 1
   updateNotification(3); // Update the notification with the new quantity
   updatePrice(3); // Increase the price for item 1
@@ -368,7 +411,8 @@ btn3.addEventListener("click", function(){
   calculateTotalPrices();
 });
 
-btn4.addEventListener("click", function(){
+btn4.addEventListener("click", function(event){
+  event.preventDefault();
   quantities[4]++; // Increase the quantity for item 2
   updateNotification(4); // Update the notification with the new quantity
   updatePrice(4); // Increase the price for item 1
@@ -386,7 +430,8 @@ btn4.addEventListener("click", function(){
   calculateTotalPrices();
 });
 
-btn5.addEventListener("click", function(){
+btn5.addEventListener("click", function(event){
+  event.preventDefault();
   quantities[5]++; // Increase the quantity for item 1
   updateNotification(5); // Update the notification with the new quantity
   updatePrice(5); // Increase the price for item 1
@@ -405,7 +450,8 @@ btn5.addEventListener("click", function(){
   calculateTotalPrices();
 });
 
-btn6.addEventListener("click", function(){
+btn6.addEventListener("click", function(event){
+  event.preventDefault();
   quantities[6]++; // Increase the quantity for item 2
   updateNotification(6); // Update the notification with the new quantity
   updatePrice(6); // Increase the price for item 1
@@ -425,7 +471,8 @@ foods[6] = {
 });
 // Repeat the same for other items
 
-removeBtn1.addEventListener("click", function(){
+removeBtn1.addEventListener("click", function(event){
+  event.preventDefault();
   if (quantities[1] > 0) {
     quantities[1]--; // Decrease the quantity for item 1
      updatePrice(1); // Update the displayed price for item 1
@@ -439,7 +486,8 @@ removeBtn1.addEventListener("click", function(){
   calculateTotalPrices();
 });
 
-removeBtn2.addEventListener("click", function(){
+removeBtn2.addEventListener("click", function(event){
+  event.preventDefault();
   if (quantities[2] > 0) {
     quantities[2]--; // Decrease the quantity for item 1
     updateNotification(2); // Update the notification with the new quantity
@@ -452,7 +500,8 @@ removeBtn2.addEventListener("click", function(){
   }
   calculateTotalPrices();
 });
-removeBtn3.addEventListener("click", function(){
+removeBtn3.addEventListener("click", function(event){
+ event.preventDefault();
   if (quantities[3] > 0) {
     quantities[3]--; // Decrease the quantity for item 1
     updateNotification(3); // Update the notification with the new quantity
@@ -466,7 +515,8 @@ removeBtn3.addEventListener("click", function(){
   calculateTotalPrices();
 });
 
-removeBtn4.addEventListener("click", function(){
+removeBtn4.addEventListener("click", function(event){
+  event.preventDefault();
   if (quantities[4] > 0) {
     quantities[4]--; // Decrease the quantity for item 1
     updateNotification(4); // Update the notification with the new quantity
@@ -480,7 +530,8 @@ removeBtn4.addEventListener("click", function(){
   calculateTotalPrices();
 });
 
-removeBtn5.addEventListener("click", function(){
+removeBtn5.addEventListener("click", function(event){
+  event.preventDefault();
   if (quantities[5] > 0) {
     quantities[5]--; // Decrease the quantity for item 1
     updateNotification(5); // Update the notification with the new quantity
@@ -494,7 +545,8 @@ removeBtn5.addEventListener("click", function(){
   calculateTotalPrices();
 });
 
-removeBtn6.addEventListener("click", function(){
+removeBtn6.addEventListener("click", function(event){
+  event.preventDefault();
   if (quantities[6] > 0) {
     quantities[6]--; // Decrease the quantity for item 1
     updateNotification(6); // Update the notification with the new quantity
