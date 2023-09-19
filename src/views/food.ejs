@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Permissions-Policy" content="geolocation=(self 'https://fantasyzoom22.github.io/regTeg'), microphone=()">
   <title>Document</title>
 </head>
 <script>
@@ -36,14 +35,11 @@ window.extAsyncInit = function() {
 
 function handleSaveBtn() {
 
-  // Close the webview after making the request
-  MessengerExtensions.requestCloseBrowser(function success() {
-
   const serverEndpoint = '/setup-webview';
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: document.getElementById("psid").value, // Use the retrieved PSID
+    psid: "6553688128054279", // Use the retrieved PSID
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
@@ -64,8 +60,9 @@ function handleSaveBtn() {
       // Handle errors
       console.error(error);
     });
-
-    console.log("Webview closing");
+  // Close the webview after making the request
+  MessengerExtensions.requestCloseBrowser(function success() {
+  console.log("Webview closing");
   }, function error(err) {
     console.log(err);
   });
