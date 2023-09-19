@@ -22,7 +22,8 @@ window.extAsyncInit = function() {
     function success(thread_context){
       // success
    
-   document.getElementById("psid").value= thread_context.psid; // Update the hidden input field if needed
+   const psid = document.getElementById("psid").value= thread_context.psid; // Update the hidden input field if needed
+   console.log (psid);
     },
     function error(err){
       // error
@@ -42,7 +43,32 @@ window.extAsyncInit = function() {
 
 //}
 
-function handleSaveBtn() { 
+ const serverEndpoint = '/setup-webview';
+
+  // Prepare the data to send to the server
+  const requestData = {
+    psid: document.getElementById("psid").value, // Use the PSID passed as a parameter
+    foods: foods, // Assuming 'foods' is an object with item data as you've defined
+  };
+
+  // Make an HTTP POST request to the server
+  fetch(serverEndpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the response from the server as needed
+      console.log(data);
+    })
+    .catch((error) => {
+      // Handle errors
+      console.error(error);
+    });
+
     MessengerExtensions.requestCloseBrowser(function success() {
         console.log("Webview closing");
     }, function error(err) {
