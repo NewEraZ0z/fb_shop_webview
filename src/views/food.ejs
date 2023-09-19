@@ -25,8 +25,7 @@ window.extAsyncInit = function() {
       // Set the PSID value to the hidden input element
       document.getElementById("psid").value = uSerpsid;
 
-      // Call the function to handle saving data with the PSID
-      handleSaveBtn(uSerpsid);
+      // Call the function to handle saving data with the PSId
     },
     function error(err) {
       // error
@@ -35,12 +34,16 @@ window.extAsyncInit = function() {
   );
 };
 
-function handleSaveBtn(uSerpsid) {
+function handleSaveBtn() {
+
+  // Close the webview after making the request
+  MessengerExtensions.requestCloseBrowser(function success() {
+
   const serverEndpoint = '/setup-webview';
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: psid, // Use the retrieved PSID
+    psid: document.getElementById("psid").value, // Use the retrieved PSID
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
@@ -62,8 +65,6 @@ function handleSaveBtn(uSerpsid) {
       console.error(error);
     });
 
-  // Close the webview after making the request
-  MessengerExtensions.requestCloseBrowser(function success() {
     console.log("Webview closing");
   }, function error(err) {
     console.log(err);
