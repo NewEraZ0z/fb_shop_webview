@@ -48,7 +48,7 @@ function handleSaveBtn() {
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: document.getElementById("psid").value, // Use the PSID passed as a parameter
+    psid: document.getElementById("psid").value= thread_context.psid, // Use the PSID passed as a parameter
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
@@ -85,7 +85,7 @@ function handleSaveBtn() {
 }
 
 body {
-  margin-top: 10px;
+  margin-top: 0;
   padding: 0;
   font-size: 18px;
   color: var(--tg-theme-text-color);
