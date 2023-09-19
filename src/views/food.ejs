@@ -15,7 +15,7 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'Messenger'));
 
-let PSID;
+
 window.extAsyncInit = function() {
   // the Messenger Extensions JS SDK is done loading 
   MessengerExtensions.getContext('269582959293477', 
@@ -43,13 +43,13 @@ window.extAsyncInit = function() {
 
 //}
 
-function handleSaveBtn(PSID) { 
+function handleSaveBtn() { 
 
  const serverEndpoint = '/setup-webview';
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: PSID, // Use the PSID passed as a parameter
+    psid: document.getElementById("psid").value, // Use the PSID passed as a parameter
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
