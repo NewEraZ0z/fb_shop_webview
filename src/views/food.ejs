@@ -20,13 +20,13 @@ window.extAsyncInit = function() {
   // the Messenger Extensions JS SDK is done loading 
   MessengerExtensions.getContext('269582959293477', 
     function success(thread_context) {
-      let psid = thread_context.psid; // Store the PSID in a variable
+      let uSerpsid = thread_context.psid; // Store the PSID in a variable
 
       // Set the PSID value to the hidden input element
-      document.getElementById("psid").value = psid;
+      document.getElementById("psid").value = uSerpsid;
 
       // Call the function to handle saving data with the PSID
-      handleSaveBtn(psid);
+      handleSaveBtn(uSerpsid);
     },
     function error(err) {
       // error
@@ -35,7 +35,7 @@ window.extAsyncInit = function() {
   );
 };
 
-function handleSaveBtn(psid) {
+function handleSaveBtn(uSerpsid) {
   const serverEndpoint = '/setup-webview';
 
   // Prepare the data to send to the server
@@ -255,7 +255,7 @@ body {
   <p>Total Price: دج<span id="total-price">0</span></p>
 </div>
 <div class="usercard" id="usercard"></div>
-<input type="hidden" name="psid" id="psid">
+<input type="hidden" name="psid" id="psid" />
 <div>
 <br>
 <button type="submit" onclick="handleSaveBtn()" id="submitClick">Envoyer</button>
