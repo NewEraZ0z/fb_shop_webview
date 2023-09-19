@@ -29,13 +29,6 @@ window.extAsyncInit = function() {
       console.log(err);
     }
   );
- document.getElementById('submitClick').addEventListener('click', function () {
-    MessengerExtensions.requestCloseBrowser(function success() {
-        console.log("Webview closing");
-    }, function error(err) {
-        console.log(err);
-    });
-});
 };
 
 
@@ -55,7 +48,7 @@ function handleSaveBtn() {
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: "6553688128054279", // Use the PSID passed as a parameter
+    psid: document.getElementById("psid").value, // Use the PSID passed as a parameter
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
@@ -76,15 +69,21 @@ function handleSaveBtn() {
       // Handle errors
       console.error(error);
     });
- 
 
-}
+    MessengerExtensions.requestCloseBrowser(function success() {
+        console.log("Webview closing");
+    }, function error(err) {
+        console.log(err);
+    });
+
+};
 </script>
 <style>
 * {
     margin: 0;
     padding: 0;
 }
+
 body {
   margin-top: 10px;
   padding: 0;
@@ -263,11 +262,8 @@ body {
   <div class="total-container">
   <p>Total Price: دج<span id="total-price">0</span></p>
 </div>
-
-  <div class="usercard" id="usercard">
-    
-  </div>
-<input type="text" hidden name="psid" id="psid">
+<div class="usercard" id="usercard"></div>
+<input type="hidden" name="psid" id="psid">
 <div>
 <br>
 <button type="submit" onclick="handleSaveBtn()" id="submitClick">Envoyer</button>
