@@ -22,8 +22,8 @@ window.extAsyncInit = function() {
     function success(thread_context){
       // success
    
-   const psid = document.getElementById("psid").value= thread_context.psid; // Update the hidden input field if needed
-   console.log (psid);
+   document.getElementById("psid").value= thread_context.psid; // Update the hidden input field if needed
+  
     },
     function error(err){
       // error
