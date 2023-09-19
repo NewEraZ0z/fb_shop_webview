@@ -15,16 +15,13 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'Messenger'));
 
-let psid;
 window.extAsyncInit = function() {
   // the Messenger Extensions JS SDK is done loading 
   MessengerExtensions.getContext('269582959293477', 
     function success(thread_context){
       // success
-   // Store PSID as a global variable
-    psid = thread_context.psid;
+   
     document.getElementById("psid").value= thread_context.psid; // Update the hidden input field if needed
-
 
     },
     function error(err){
@@ -51,7 +48,7 @@ function handleSaveBtn(psid) {
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: psid, // Use the PSID passed as a parameter
+    psid: document.getElementById('psid').value,, // Use the PSID passed as a parameter
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
@@ -73,13 +70,13 @@ function handleSaveBtn(psid) {
       console.error(error);
     });
 
-MessengerExtensions.requestCloseBrowser(function success() {
-// webview closed
-}, function error(err) {
-// an error occurred
- console.log(err)
+document.getElementById('submitClick').addEventListener('click', function () {
+    MessengerExtensions.requestCloseBrowser(function success() {
+        console.log("Webview closing");
+    }, function error(err) {
+        console.log(err);
+    });
 });
-
 
 }
 </script>
@@ -269,7 +266,7 @@ body {
 <input type="text" hidden name="psid" id="psid">
 <div>
 <br>
-<button type="submit" onclick="handleSaveBtn()">Envoyer</button>
+<button type="submit" onclick="handleSaveBtn()" id="submitClick">Envoyer</button>
 </div>
 </form>
 <script>
