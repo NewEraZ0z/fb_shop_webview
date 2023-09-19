@@ -19,14 +19,14 @@
 window.extAsyncInit = function() {
   // the Messenger Extensions JS SDK is done loading 
   MessengerExtensions.getContext('269582959293477', 
-    function success(thread_context){
-      // success
-   
-   const senderId = document.getElementById("psid").value= thread_context.psid; // Update the hidden input field if needed
-console.log("succefull psid received:" + senderId);
-  
+    function success(thread_context) {
+      // Log the PSID to the console
+      console.log('PSID:', thread_context.psid);
+
+      // Store PSID as a global variable or use it as needed
+      document.getElementById('psid').value = thread_context.psid;
     },
-    function error(err){
+    function error(err) {
       // error
       console.log(err);
     }
