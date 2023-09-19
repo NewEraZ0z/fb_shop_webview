@@ -47,10 +47,11 @@ window.extAsyncInit = function() {
  function handleSaveBtn() {
 
  const serverEndpoint = '/setup-webview';
+ const senderId = document.getElementById("psid").value;
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: psid, // Use the PSID passed as a parameter
+    psid: senderId, // Use the PSID passed as a parameter
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
