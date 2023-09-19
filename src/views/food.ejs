@@ -70,13 +70,11 @@ function handleSaveBtn() {
       console.error(error);
     });
 
-document.getElementById('submitClick').addEventListener('click', function () {
     MessengerExtensions.requestCloseBrowser(function success() {
         console.log("Webview closing");
     }, function error(err) {
         console.log(err);
     });
-});
 
 }
 </script>
