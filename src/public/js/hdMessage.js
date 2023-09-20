@@ -18,7 +18,6 @@ window.extAsyncInit = function() {
         let userId = thread_context.psid;
         document.getElementById("psid").value = userId;
         // More code to follow
-      handleSaveBtn(userId);
       },
       function error(err) {
         console.log(err);
@@ -28,18 +27,17 @@ window.extAsyncInit = function() {
 }, function error(err) {
   console.log(err);
 });
+};
 
 
-// Close the webview after making the request
-MessengerExtensions.requestCloseBrowser(function success() {
-  // webview closed
+
   
-function handleSaveBtn(userId) {
+function handleSaveBtn() {
 const serverEndpoint = '/setup-webview';
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: userId, // Use the retrieved PSID
+    psid: document.getElementById("psid").value, // Use the retrieved PSID
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
@@ -51,6 +49,14 @@ const serverEndpoint = '/setup-webview';
     },
     body: JSON.stringify(requestData),
   })
+    
+// Close the webview after making the request
+MessengerExtensions.requestCloseBrowser(function success() {
+}, function error(err) {
+  console.log(err);
+  // an error occurred
+});
+  //jumping-line
     .then((response) => response.json())
     .then((data) => {
       // Handle the response from the server as needed
@@ -59,10 +65,5 @@ const serverEndpoint = '/setup-webview';
       // Handle errors
       console.error(error);
     });
-}
-  //webview success
-}, function error(err) {
-  // an error occurred
-});
 
-};
+}
