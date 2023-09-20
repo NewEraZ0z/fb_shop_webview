@@ -37,7 +37,7 @@ const serverEndpoint = '/setup-webview';
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: document.getElementById("psid").value, // Use the retrieved PSID
+    psid: psid, // Use the retrieved PSID
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
