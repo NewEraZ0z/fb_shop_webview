@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
@@ -22,7 +23,8 @@ window.extAsyncInit = function() {
     MessengerExtensions.getContext('269582959293477',
       function success(thread_context) {
         // success
-        document.getElementById("psid").value = thread_context.psid;
+        let userId = thread_context.psid;
+        document.getElementById("psid").value = userId;
         // More code to follow
       },
       function error(err) {
