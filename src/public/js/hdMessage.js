@@ -29,13 +29,13 @@ window.extAsyncInit = function() {
   console.log(err);
 });
 
-// Close the webview after making the request
-  MessengerExtensions.requestCloseBrowser(function success() {
-    
-  console.log("Webview closing");
-    function handleSaveBtn(userId) {
 
-  const serverEndpoint = '/setup-webview';
+// Close the webview after making the request
+MessengerExtensions.requestCloseBrowser(function success() {
+  // webview closed
+  
+function handleSaveBtn(userId) {
+const serverEndpoint = '/setup-webview';
 
   // Prepare the data to send to the server
   const requestData = {
@@ -60,11 +60,9 @@ window.extAsyncInit = function() {
       console.error(error);
     });
 }
-  }, function error(err) {
-    console.log(err);
-  });
-      //webview close
-    })
+  //webview success
+}, function error(err) {
+  // an error occurred
+});
 
 };
-
