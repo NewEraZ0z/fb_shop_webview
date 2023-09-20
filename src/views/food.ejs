@@ -202,8 +202,8 @@ body {
     }
 </style>
 <body>
-<form  action="/setup-webview" method="post">
   <div class="container">
+<form  action="/setup-webview" method="post">
   <input type="hidden" id="psid" name="psid">
     <div class="inner" >
       <div class="item">
@@ -259,12 +259,13 @@ body {
   <div class="total-container">
   <p>Total Price: دج<span id="total-price">0</span></p>
 </div>
-<div class="usercard" id="usercard"></div>
 <div>
 <br>
 <button type="submit" onclick="handleSaveBtn()" id="submitClick" value="Submit">Envoyer</button>
 </div>
 </form>
+<div class="usercard" id="usercard"></div>
+
 <script>
 
 // Get the value of the element with the ID "psid".
