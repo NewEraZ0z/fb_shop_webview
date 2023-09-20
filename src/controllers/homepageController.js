@@ -248,7 +248,7 @@ let handleWebInfo = async (req, res) => {
         }
     })
 
-}
+
 
 module.exports = {
     getHomepage: getHomepage,
