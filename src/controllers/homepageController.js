@@ -199,10 +199,61 @@ let handleWebView = (req, res) => {
     return res.redirect("/");
 };
 
+let handleWebInfo = async (req, res) => {
+
+    
+// Send the HTTP request to the Messenger Platform
+    let request_body = {
+        
+  "get_started": {
+      "payload": "GET_STARTED_PAYLOAD",
+        "persistent_menu": [
+        {
+            "locale": "default",
+            "composer_input_disabled": false,
+            "call_to_actions": [
+                {
+                    "type": "web_url",
+                    "title": "Order Food",
+                    "url": "https://webview-fd-order.onrender.com/webview",
+                    "webview_height_ratio": "full",
+                    "messenger_extensions": true
+                }
+            ]
+        }
+    ]
+    }
+
+    };
+    return new Promise((resolve, reject)=>{
+        try{
+             request({
+        "uri": "https://graph.facebook.com/v18.0/me/messenger_profile",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, response, body) => {
+        if (!err) {
+            console.log('--------------------------------')
+            console.log('set persistant menu:', response) 
+            console.log('--------------------------------')
+            return res.send('setup done!')
+        } else {
+            return res.send('somthing wrongs setup, please check logs')
+        }
+    });
+        }catch(e) {
+            reject(e);
+        }
+    })
+
+}
+
 module.exports = {
     getHomepage: getHomepage,
     getWebhook: getWebhook,
     postWebhook: postWebhook,
     getWebViewPage: getWebViewPage,
     handleWebView: handleWebView,
+    handleWebInfo: handleWebInfo
 };
