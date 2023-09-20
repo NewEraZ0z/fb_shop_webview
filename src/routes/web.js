@@ -10,6 +10,7 @@ let initWebRoutes = (app) => {
     router.post("/webhook", homepageController.postWebhook);
     router.get("/webview", homepageController.getWebViewPage);
     router.post("/setup-webview", homepageController.handleWebView);
+    router.post("/setup", homepageController.handleWebInfo);
 
     return app.use("/", router);
 };
