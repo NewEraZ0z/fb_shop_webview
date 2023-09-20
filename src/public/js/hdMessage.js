@@ -52,15 +52,17 @@ function handleSaveBtn(userId) {
     .then((data) => {
       // Handle the response from the server as needed
       console.log(data);
-    })
-    .catch((error) => {
-      // Handle errors
-      console.error(error);
-    });
-  // Close the webview after making the request
+
+       // Close the webview after making the request
   MessengerExtensions.requestCloseBrowser(function success() {
   console.log("Webview closing");
   }, function error(err) {
     console.log(err);
   });
+      //webview close
+    })
+    .catch((error) => {
+      // Handle errors
+      console.error(error);
+    });
 }
