@@ -206,7 +206,8 @@ let handleWebInfo = async (req, res) => {
     let request_body = {
         
   "get_started": {
-      "payload": "GET_STARTED_PAYLOAD",
+      "payload": "GET_STARTED_PAYLOAD"
+        },
         "persistent_menu": [
         {
             "locale": "default",
