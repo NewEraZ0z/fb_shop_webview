@@ -15,7 +15,7 @@ window.extAsyncInit = function() {
       // success
       document.getElementById('psid').value =  thread_context.psid; // Store PSID as a global variable
       let userID = thread_context.psid;
-      console.log(JSON.stringify(userID));
+      console.log("PSID:" + userID);
     },
     function error(err){
       // error
