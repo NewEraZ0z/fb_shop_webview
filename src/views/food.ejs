@@ -4,14 +4,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="js/hdMessage.js"></script>
+  <script src="js/hdMessage.js">
+    
+(function(d, s, id){
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'Messenger'));
+
+  </script>
   <title>Document</title>
 </head>
 <style>
-* {
-    margin: 0;
-    padding: 0;
-}
 
 body {
   margin-top: 10px;
