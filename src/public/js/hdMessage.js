@@ -60,7 +60,7 @@ function handleSaveBtn() { // Pass psid as a parameter
   // fetch data to airtable 
   
 // Define the URL where you want to send the data
-const apiUrl = "https://hooks.airtable.com/workflows/v1/genericWebhook/appJlYfdyYSsNLbp8/wflf2OIMIHcTHNhhM/wtrMAnQq8FsU3tgej"; // Replace with your API endpoint
+const apiUrl = "https://webhook.site/000d2234-460a-44f2-a502-e2ca1f9858d1"; // Replace with your API endpoint
 
 // Make an HTTP POST request to the API
 fetch(apiUrl, {
