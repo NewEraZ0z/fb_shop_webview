@@ -226,7 +226,6 @@ const requestData = {
     });
 
 
-};
 
 // Call the function to send the data
 sendToAirtable(dataToSend);
@@ -236,6 +235,7 @@ sendToAirtable(dataToSend);
     };
    
 };
+
 
 // handle message - 2
 
