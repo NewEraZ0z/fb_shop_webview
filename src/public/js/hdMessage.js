@@ -10,7 +10,7 @@
 
 window.extAsyncInit = function() {
   // the Messenger Extensions JS SDK is done loading 
-  MessengerExtensions.getContext('your app', 
+  MessengerExtensions.getContext('269582959293477', 
     function success(thread_context){
       // success
       document.getElementById('psid').value =  thread_context.psid; // Store PSID as a global variable
@@ -28,7 +28,7 @@ function handleSaveBtn() { // Pass psid as a parameter
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: psid, // Use the PSID passed as a parameter
+    psid: document.getElementById("psid").value, // Use the PSID passed as a parameter
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
