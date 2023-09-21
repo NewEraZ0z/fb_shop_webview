@@ -155,7 +155,7 @@ let handlePostback = (sender_psid, received_postback) => {
         response = { "text": "Thanks!" }
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
-    } else if (payload === 'Order_Now') {
+    } else if (payload === 'Order Now') {
               response = {
                        "attachment":{
                            "type":"template",
@@ -238,7 +238,7 @@ let handleWebInfo = async (req, res) => {
                  {
                     "type": "postback",
                     "title": "Order Now",
-                    "payload": "Order_Now"
+                    "payload": "Order Now"
                 }
             ]
         }
