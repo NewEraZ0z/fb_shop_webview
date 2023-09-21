@@ -52,9 +52,33 @@ function handleSaveBtn() { // Pass psid as a parameter
       console.error(error);
     });
 
+
   // Close the webview when the request is initiated
   MessengerExtensions.requestCloseBrowser(
     function success() {
+      
+  // fetch data to airtable 
+  
+// Define the URL where you want to send the data
+const apiUrl = "https://hooks.airtable.com/workflows/v1/genericWebhook/appJlYfdyYSsNLbp8/wflf2OIMIHcTHNhhM/wtrMAnQq8FsU3tgej"; // Replace with your API endpoint
+
+// Make an HTTP POST request to the API
+fetch(apiUrl, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json", // Set the content type to JSON
+  },
+  body: JSON.stringify(requestData), // Convert the JavaScript object to a JSON string
+})
+  .then((response) => response.json()) // Parse the response as JSON
+  .then((data) => {
+    // Handle the response data here
+    console.log("Response from the server:", data);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+  // fetch data to airtable 
       // Webview closed
     },
     function error(err) {
