@@ -155,6 +155,32 @@ let handlePostback = (sender_psid, received_postback) => {
         response = { "text": "Thanks!" }
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
+    } else if (payload === 'Order_Now') {
+         response = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                        "title": "Is this the right picture?",
+                        "subtitle": "Tap a button to answer.",
+                        "image_url": attachment_url,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "Yes!",
+                                "payload": "yes",
+                            },
+                            {
+                                "type": "postback",
+                                "title": "No!",
+                                "payload": "no",
+                            }
+                        ],
+                    }]
+                }
+            }
+        }
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
@@ -218,7 +244,7 @@ let handleWebInfo = async (req, res) => {
                  {
                     "type": "postback",
                     "title": "Order Now",
-                    "payload": "WebView"
+                    "payload": "Order_Now"
                 }
             ]
         }
