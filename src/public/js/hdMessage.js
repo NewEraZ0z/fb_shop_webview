@@ -1,18 +1,21 @@
-window.extAsyncInit = function() {
-  // the Messenger Extensions JS SDK is done loading 
-  MessengerExtensions.getContext('269582959293477', 
-    function success(thread_context){
-      // success
-      document.getElementById('psid').value =  thread_context.psid; // Store PSID as a global variable
-      let userID = thread_context.psid;
-      console.log("PSID:",userID);
-    },
-    function error(err){
-      // error
-      console.log(err);
-    }
-  );
-};
+MessengerExtensions.getSupportedFeatures(function success(result) {
+  let features = result.supported_features;
+  if (features.indexOf("context") != -1) {
+    MessengerExtensions.getContext('<YOUR_APP_ID>',
+      function success(thread_context) {
+        // success
+        document.getElementById("psid").value = thread_context.psid;
+        // More code to follow
+      },
+      function error(err) {
+        console.log(err);
+      }
+    );
+  }
+}, function error(err) {
+  console.log(err);
+});
+
 
 function handleSaveBtn() { // Pass psid as a parameter
   // Assuming you have a server endpoint to send the 'foods' data to.
