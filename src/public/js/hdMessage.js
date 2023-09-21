@@ -15,22 +15,22 @@ window.extAsyncInit = function() {
       // success
       document.getElementById('psid').value =  thread_context.psid; // Store PSID as a global variable
       let userID = thread_context.psid;
-      console.log("PSID:" + userID);
+      console.log("PSID:", userID);
     },
     function error(err){
       // error
       console.log(err);
     }
   );
-};
 
-function handleSaveBtn() { // Pass psid as a parameter
+  //send request and close webview
+  function handleSaveBtn(userID) { // Pass psid as a parameter
   // Assuming you have a server endpoint to send the 'foods' data to.
   const serverEndpoint = '/setup-webview';
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: document.getElementById("psid").value, // Use the PSID passed as a parameter
+    psid: userID, // Use the PSID passed as a parameter
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
@@ -63,3 +63,7 @@ function handleSaveBtn() { // Pass psid as a parameter
     }
   );
 }
+  // send request and close webview
+};
+
+
