@@ -170,10 +170,11 @@ let handlePostback = (sender_psid, received_postback) => {
                                      "messenger_extensions": "true",
                                      "webview_height_ratio": "tall",
                                     },
-                                   
+                                   {
                                       "whitelisted_domains":[
                                             "https://webview-fd-order.onrender.com/webview",
-                                                        ]
+                                                      ]
+                                   }
                                         ]
                                   }
                        }
