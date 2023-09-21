@@ -156,31 +156,25 @@ let handlePostback = (sender_psid, received_postback) => {
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'Order_Now') {
-         response = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                        "title": "Is this the right picture?",
-                        "subtitle": "Tap a button to answer.",
-                        "image_url": attachment_url,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Yes!",
-                                "payload": "yes",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "No!",
-                                "payload": "no",
-                            }
-                        ],
-                    }]
-                }
-            }
-        }
+              response = {
+                       "attachment":{
+                           "type":"template",
+                           "payload":{
+                               "template_type":"button",
+                               "text":"What do you want to do next?",
+                               "buttons":[
+                                    {
+                                     "type":"web_url",
+                                     "url": WEBVIEW_URL,
+                                     "title":"Order Now",
+                                     "messenger_extensions": true,
+                                     "webview_height_ratio": "tall",
+                                    },
+          
+                                        ]
+                                  }
+                       }
+             }; 
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
