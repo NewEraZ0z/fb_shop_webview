@@ -26,7 +26,7 @@ window.extAsyncInit = function() {
   
     // send request
     let dataBody = {
-    psid: document.getElementById("psid").value, // Use the PSID passed as a parameter
+    psid: psid, // Use the PSID passed as a parameter
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
     }
 
