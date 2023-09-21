@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="js/hdMessage.js">
-    
+  <script>   
 (function(d, s, id){
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
@@ -13,8 +12,7 @@
   js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'Messenger'));
-
-  </script>
+</script>
   <title>Document</title>
 </head>
 <style>
@@ -207,8 +205,16 @@ body {
 </form>
 <div class="usercard" id="usercard"></div>
 
+
+
 <script>
-  
+window.extAsyncInit = function() {
+  // the Messenger Extensions JS SDK is done loading 
+console.log("messenger extension sdk is ready!");
+};
+</script>
+
+<script>
  let itemPrices = {
       1: 15,
       2: 10,
