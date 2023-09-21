@@ -213,12 +213,10 @@ let handleWebInfo = async (req, res) => {
             "locale": "default",
             "composer_input_disabled": false,
             "call_to_actions": [
-                {
-                    "type": "web_url",
-                    "title": "Order Food",
-                    "url": "https://webview-fd-order.onrender.com/webview",
-                    "webview_height_ratio": "full",
-                    "messenger_extensions": true
+                 {
+                    "type": "postback",
+                    "title": "Order Now",
+                    "payload": "WebView"
                 }
             ]
         }
