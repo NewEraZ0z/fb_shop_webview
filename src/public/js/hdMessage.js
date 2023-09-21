@@ -26,7 +26,7 @@ window.extAsyncInit = function() {
   //send request and close webview
   function handleSaveBtn() { // Pass psid as a parameter
   // Assuming you have a server endpoint to send the 'foods' data to.
-  const serverEndpoint = '${window.location.origin}/setup-webview';
+  const serverEndpoint = '/setup-webview';
 
   // Prepare the data to send to the server
   const requestData = {
