@@ -20,7 +20,7 @@ function handleSaveBtn() { // Pass psid as a parameter
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: "6553688128054279", // Use the PSID passed as a parameter
+    psid: document.getElementById("psid").value, // Use the PSID passed as a parameter
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
