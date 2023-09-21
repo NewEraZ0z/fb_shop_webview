@@ -188,56 +188,18 @@ let callSendAPI = (sender_psid, response) => {
 let getWebViewPage = (req, res) => {
     return res.render("food.ejs");
 };
-// -handle
-//let handleWebView = (req, res) => {
-    //console.log(req.body);
-    //let response =  {
-        //"text": 'Exellent !! nous avons Recus votre Commande we are coocking'
-    //};
-    
-    //callSendAPI(req.body.psid, response);
-    //return res.redirect("/");
-//};
-// -handle
+
 
 let handleWebView = (req, res) => {
-     //console.log(req.body);
-
-const serverEndpoint = "https://hooks.airtable.com/workflows/v1/genericWebhook/appJlYfdyYSsNLbp8/wflf2OIMIHcTHNhhM/wtrMAnQq8FsU3tgej"
-const requestData = {
-    foods: req.body.foods
-}
-// Make an HTTP POST request to the server
-  fetch(serverEndpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(requestData),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      // Handle the response from the server as needed
-      console.log(data);
-    })
-    .catch((error) => {
-      // Handle errors
-      console.error(error);
-    });
-
-
-
-// Call the function to send the data
-sendToAirtable(dataToSend);
     console.log(req.body);
     let response =  {
         "text": 'Exellent !! nous avons Recus votre Commande we are coocking'
     };
-   
+    
+    callSendAPI(req.body.psid, response);
+    return res.redirect("/");
 };
 
-
-// handle message - 2
 
 let handleWebInfo = async (req, res) => {
 
