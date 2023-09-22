@@ -6,13 +6,12 @@ MessengerExtensions.getSupportedFeatures(function success(result) {
         // success
         $("#psid").val(thread_context.psid);
         // More code to follow
-        function handleSaveBtn();
+        handleSaveBtn();
       },
       function error(err) {
+        onsole.log("return content messengerExtension",err);
          $("#psid").val(sender_psid);
-        
-        console.log("return content messengerExtension",err);
-        function handleSaveBtn();
+        handleSaveBtn();
       }
     );
   }
