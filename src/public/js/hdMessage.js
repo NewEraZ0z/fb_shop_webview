@@ -8,12 +8,19 @@ window.extAsyncInit = function() {
     MessengerExtensions.getContext('269582959293477',
       function success(thread_context) {
         // success
+        
         $("#psid").val(thread_context.psid);
         // More code to follow
       },
       function error(err) {
         console.log("return content messengerExtension",err);
-        $("#psid").val(sender_psid);
+        var url =  thread_context.sender_psid;
+        // Find the index of the "?" character in the UzL
+var indexOfQuestionMark = url.indexOf('?');
+// Extract the part of the URL before the "?"
+var sender_psid = (indexOfQuestionMark !== -1) ? url.substring(0, indexOfQuestionMark) : url;
+// Set the value of the HTML element with the ID "psid"
+$("#psid").val(sender_psid);
       }
     );
   }
