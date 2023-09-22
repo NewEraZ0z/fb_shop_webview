@@ -97,7 +97,7 @@ let handleMessage = (sender_psid, received_message) => {
                                "buttons":[
                                     {
                                      "type":"web_url",
-                                     "url": WEBVIEW_URL + "/" + sender_psid,
+                                     "url": WEBVIEW_URL + "?senderID=" + sender_psid,
                                      "title":"Order Now",
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
@@ -165,7 +165,7 @@ let handlePostback = (sender_psid, received_postback) => {
                                "buttons":[
                                     {
                                      "type":"web_url",
-                                     "url": WEBVIEW_URL + "/" + sender_psid,
+                                     "url": WEBVIEW_URL + "?senderID=" + sender_psid,
                                      "title":"Order Now",
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
@@ -205,9 +205,9 @@ let callSendAPI = (sender_psid, response) => {
 };
 
 let getWebViewPage = (req, res) => {
-    let sender_psid = req.params.sender_psid
+    let senderID = req.params.senderID
     return res.render("food.ejs", {
-        sender_psid: sender_psid
+        senderID: senderID
     });
 };
 
