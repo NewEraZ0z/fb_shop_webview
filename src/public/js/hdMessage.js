@@ -1,33 +1,21 @@
-
-
 window.extAsyncInit = function() {
   // the Messenger Extensions JS SDK is done loading 
-  MessengerExtensions.getSupportedFeatures(function success(result) {
-  let features = result.supported_features;
-  if (features.indexOf("context") != -1) {
-    MessengerExtensions.getContext('269582959293477',
-      function success(thread_context) {
-        // success
-        
-        $("#psid").val(thread_context.psid);
-        // More code to follow
-      },
-      function error(err) {
-        console.log("return content messengerExtension",err);
-        var url =  senderID;
-        // Find the index of the "?" character in the UzL
-var indexOfQuestionMark = url.indexOf('?');
-// Extract the part of the URL before the "?"
-var sender_psid = (indexOfQuestionMark !== -1) ? url.substring(0, indexOfQuestionMark) : url;
-// Set the value of the HTML element with the ID "psid"
-$("#psid").val(sender_psid);
-      }
-    );
+  MessengerExtensions.getContext('269582959293477', 
+  function success(thread_context){
+    // success
+    $("#psid").val(thread_context.psid);
+    console.log(thread_context.psid);
+  },
+  function error(err){
+    // error
+    $("#psid").val(senderID);
+    console.log(senderID);
+    
   }
-}, function error(err) {
-  console.log(err);
-});
+);
 };
+
+
 
 function handleSaveBtn() { // Pass psid as a parameter
   // Assuming you have a server endpoint to send the 'foods' data to.
