@@ -5,13 +5,13 @@ MessengerExtensions.getSupportedFeatures(function success(result) {
       let userPSID;
       function success(thread_context) {
         // success
-        $("#psid").val(thread_context.psid);
+        document.getElementById("psid").value = thread_context.psid;
         // More code to follow
         handleSaveBtn();
       },
       function error(err) {
         console.log("return content messengerExtension",err);
-        $("#psid").val(sender_psid);
+       document.getElementById("psid").value = sender_psid;
         handleSaveBtn();
       }
     );
@@ -24,7 +24,7 @@ MessengerExtensions.getSupportedFeatures(function success(result) {
 function handleSaveBtn() { // Pass psid as a parameter
   // Assuming you have a server endpoint to send the 'foods' data to.
   const serverEndpoint = '/setup-webview';
-  let userPSID = $("#psid").val();
+  let userPSID = document.getElementById("psid").value;
   // Prepare the data to send to the server
   const requestData = {
     psid: userPSID,
