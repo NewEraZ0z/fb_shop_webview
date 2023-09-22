@@ -14,7 +14,7 @@ window.extAsyncInit = function() {
       },
       function error(err) {
         console.log("return content messengerExtension",err);
-        var url =  thread_context.sender_psid;
+        var url =  thread_context.senderID;
         // Find the index of the "?" character in the UzL
 var indexOfQuestionMark = url.indexOf('?');
 // Extract the part of the URL before the "?"
