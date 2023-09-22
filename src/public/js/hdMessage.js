@@ -8,8 +8,8 @@ window.extAsyncInit = function() {
   },
   function error(err){
     // error
-    $("#psid").val(sender_psid);
-    console.log("get content messengerExtension:", sender_psid);   
+    $("#psid").val(senderID);
+    console.log("get content messengerExtension:", senderID);   
   }
 );
 };
