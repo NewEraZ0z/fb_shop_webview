@@ -1,29 +1,33 @@
-MessengerExtensions.getSupportedFeatures(function success(result) {
+
+
+window.extAsyncInit = function() {
+  // the Messenger Extensions JS SDK is done loading 
+  MessengerExtensions.getSupportedFeatures(function success(result) {
   let features = result.supported_features;
   if (features.indexOf("context") != -1) {
     MessengerExtensions.getContext('269582959293477',
       function success(thread_context) {
         // success
-        document.getElementById("psid").value = thread_context.psid;
+        $("#psid").val(thread_context.psid);
         // More code to follow
       },
       function error(err) {
         console.log("return content messengerExtension",err);
-       document.getElementById("psid").value = thread_context.sender_psid;
+        $("#psid").val(sender_psid);
       }
     );
   }
 }, function error(err) {
   console.log(err);
 });
-
+};
 
 function handleSaveBtn() { // Pass psid as a parameter
   // Assuming you have a server endpoint to send the 'foods' data to.
   const serverEndpoint = '/setup-webview';
   // Prepare the data to send to the server
   const requestData = {
-    psid: userPSID,
+    psid: $("#psid").val();,
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
