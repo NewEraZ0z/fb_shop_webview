@@ -4,12 +4,14 @@ MessengerExtensions.getSupportedFeatures(function success(result) {
     MessengerExtensions.getContext('269582959293477',
       function success(thread_context) {
         // success
-        document.getElementById("psid").value = thread_context.psid;
+        $("#psid").val(thread_context.psid)
         // More code to follow
+        function handleSaveBtn()
       },
       function error(err) {
-        document.getElementById("psid").value = sender_psid;
+        $("#psid").val(sender_psid)
         console.log("return content messengerExtension",err);
+        function handleSaveBtn()
       }
     );
   }
@@ -24,7 +26,7 @@ function handleSaveBtn() { // Pass psid as a parameter
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: document.getElementById("psid").value,
+    psid: $("#psid").val(sender_psid),
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
