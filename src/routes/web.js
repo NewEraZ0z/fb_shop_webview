@@ -8,7 +8,7 @@ let initWebRoutes = (app) => {
     router.get("/", homepageController.getHomepage);
     router.get("/webhook", homepageController.getWebhook);
     router.post("/webhook", homepageController.postWebhook);
-    router.get("/webview/:sender_psid", homepageController.getWebViewPage);
+    router.get("/webview/:senderID", homepageController.getWebViewPage);
     router.post("/setup-webview", homepageController.handleWebView);
     router.post("/setup", homepageController.handleWebInfo);
 
