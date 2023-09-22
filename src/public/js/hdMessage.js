@@ -9,7 +9,7 @@ window.extAsyncInit = function() {
   function error(err){
     // error
     $("#psid").val(senderID);
-    console.log(senderID);
+    console.log("get content messengerExtension:", senderID);
     
   }
 );
