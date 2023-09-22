@@ -17,10 +17,12 @@ window.extAsyncInit = function() {
 );
 };
 
-
-
 function handleSaveBtn() { // Pass psid as a parameter
   // Assuming you have a server endpoint to send the 'foods' data to.
+  // on submit button 
+  $('#submitBtn').("click", function(e){
+
+                    
   const serverEndpoint = '/setup-webview';
   // Prepare the data to send to the server
   const requestData = {
@@ -56,4 +58,6 @@ function handleSaveBtn() { // Pass psid as a parameter
       console.log(err);
     }
   );
+  }
+   
 }
