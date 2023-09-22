@@ -205,9 +205,9 @@ let callSendAPI = (sender_psid, response) => {
 };
 
 let getWebViewPage = (req, res) => {
-    let senderID = req.params.sender_psid
+    let sender_psid = req.params.sender_psid
     return res.render("food.ejs", {
-        senderID: senderID
+        sender_psid: sender_psid
     });
 };
 
