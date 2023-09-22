@@ -11,7 +11,7 @@ MessengerExtensions.getSupportedFeatures(function success(result) {
       },
       function error(err) {
         console.log("get content Messenger ", err);
-        $("#psid').val(sender_psid);
+        $("#psid").val(sender_psid);
       }
     );
   }
