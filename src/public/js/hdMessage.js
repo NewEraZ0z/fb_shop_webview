@@ -1,18 +1,22 @@
 window.extAsyncInit = function() {
-  // the Messenger Extensions JS SDK is done loading 
-  MessengerExtensions.getContext('269582959293477', 
-  function success(thread_context,senderID){
-    let userPSID = senderID;
-    // success
-    $("#psid").val(thread_context.psid);
-    console.log(thread_context.psid);
-  },
-  function error(err){
-    // error
-    $("#psid").val(userPSID);
-    console.log("get content messengerExtension:", userPSID);   
+MessengerExtensions.getSupportedFeatures(function success(result) {
+  let features = result.supported_features;
+  if (features.indexOf("context") != -1) {
+    MessengerExtensions.getContext('269582959293477',
+      function success(thread_context) {
+        // success
+        $("#psid').val(thread_context.psid);
+        // More code to follow
+      },
+      function error(err) {
+        console.log("get content Messenger ", err);
+        $("#psid').val(senderID);
+      }
+    );
   }
-);
+}, function error(err) {
+  console.log(err);
+});
 };
 
 function handleSaveBtn() { // Pass psid as a parameter
