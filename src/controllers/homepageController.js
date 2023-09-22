@@ -97,7 +97,7 @@ let handleMessage = (sender_psid, received_message) => {
                                "buttons":[
                                     {
                                      "type":"web_url",
-                                     "url": WEBVIEW_URL,
+                                     "url": '${WEBVIEW_URL}?sender_psid=${sender_psid}',
                                      "title":"Order Now",
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
@@ -165,7 +165,7 @@ let handlePostback = (sender_psid, received_postback) => {
                                "buttons":[
                                     {
                                      "type":"web_url",
-                                     "url": WEBVIEW_URL,
+                                     "url": '${WEBVIEW_URL}?sender_psid=${sender_psid}',
                                      "title":"Order Now",
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
