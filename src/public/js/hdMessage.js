@@ -24,7 +24,6 @@ MessengerExtensions.getSupportedFeatures(function success(result) {
 function handleSaveBtn() { // Pass psid as a parameter
   // Assuming you have a server endpoint to send the 'foods' data to.
   const serverEndpoint = '/setup-webview';
-  let userPSID = document.getElementById("psid").value;
   // Prepare the data to send to the server
   const requestData = {
     psid: userPSID,
