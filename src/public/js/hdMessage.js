@@ -5,11 +5,13 @@ window.extAsyncInit = function() {
     // success
     $("#psid").val(thread_context.psid);
     console.log(thread_context.psid);
+    handleSaveBtn();
   },
   function error(err){
     // error
     $("#psid").val(senderID);
     console.log("get content messengerExtension:", senderID);
+    handleSaveBtn();
     
   }
 );
