@@ -1,24 +1,25 @@
-window.extAsyncInit = function() {
+// messenger featured from medium.com documentation 
 MessengerExtensions.getSupportedFeatures(function success(result) {
-  let features = result.supported_features;
-  if (features.indexOf("context") != -1) {
-    MessengerExtensions.getContext('269582959293477',
-      function success(thread_context) {
-        // success
-        $("#psid").val(thread_context.psid);
+let features = result.supported_features;
+if (features.indexOf("context") != -1) {
+MessengerExtensions.getContext('269582959293477',
+function success(thread_context) {
+// success
+$("#psid").val(thread_context.psid);
         console.log(thread_context.psid)
-        // More code to follow
-      },
-      function error(err) {
+
+// More code to follow
+},
+function error(err) {
         console.log("get content Messenger ", err);
         $("#psid").val(sender_psid);
-      }
-    );
-  }
+}
+);
+}
 }, function error(err) {
-  console.log(err);
+console.log(err);
 });
-};
+
 
 function handleSaveBtn() { // Pass psid as a parameter
   // Assuming you have a server endpoint to send the 'foods' data to.
