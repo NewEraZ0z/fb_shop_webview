@@ -1,24 +1,25 @@
-// messenger featured from medium.com documentation 
+window.extAsyncInit = function() {
 MessengerExtensions.getSupportedFeatures(function success(result) {
-let features = result.supported_features;
-if (features.indexOf("context") != -1) {
-MessengerExtensions.getContext('269582959293477',
-function success(thread_context) {
-// success
+  let features = result.supported_features;
+  if (features.indexOf("context") != -1) {
+    MessengerExtensions.getContext('269582959293477',
+      function success(thread_context) {
+        // success
         $("#psid").val(thread_context.psid);
         console.log(thread_context.psid)
-
-// More code to follow
-},
-function error(err) {
+        // More code to follow
+      },
+      function error(err) {
         console.log("get content Messenger ", err);
         $("#psid").val(sender_psid);
-}
-);
-}
+      }
+    );
+  }
 }, function error(err) {
-console.log(err);
+  console.log(err);
 });
+};
+
 
 
 function handleSaveBtn() { // Pass psid as a parameter
@@ -44,8 +45,13 @@ function handleSaveBtn() { // Pass psid as a parameter
     .then((data) => {
       // Handle the response from the server as needed
       console.log(data);
-            
-            // Close the webview when the request is initiated
+    })
+    .catch((error) => {
+      // Handle errors
+      console.error(error);
+    });
+
+        // Close the webview when the request is initiated
   MessengerExtensions.requestCloseBrowser(
     function success() {
       // Webview closed
@@ -56,10 +62,4 @@ function handleSaveBtn() { // Pass psid as a parameter
     }
   );
    // close browser
-    })
-    .catch((error) => {
-      // Handle errors
-      console.error(error);
-    });
-
 }
