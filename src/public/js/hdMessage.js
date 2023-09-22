@@ -4,15 +4,15 @@ MessengerExtensions.getSupportedFeatures(function success(result) {
     MessengerExtensions.getContext('269582959293477',
       function success(thread_context) {
         // success
-      let userID =  $("#psid").val(thread_context.psid);
+        $("#psid").val(thread_context.psid);
         // More code to follow
-        function handleSaveBtn(userID);
+        function handleSaveBtn();
       },
       function error(err) {
-       userID =  $("#psid").val(sender_psid);
+         $("#psid").val(sender_psid);
         
         console.log("return content messengerExtension",err);
-        function handleSaveBtn(userID);
+        function handleSaveBtn();
       }
     );
   }
@@ -21,13 +21,13 @@ MessengerExtensions.getSupportedFeatures(function success(result) {
 });
 
 
-function handleSaveBtn(userID) { // Pass psid as a parameter
+function handleSaveBtn() { // Pass psid as a parameter
   // Assuming you have a server endpoint to send the 'foods' data to.
   const serverEndpoint = '/setup-webview';
 
   // Prepare the data to send to the server
   const requestData = {
-    psid: userID,
+    psid: $("#psid").val(),
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
