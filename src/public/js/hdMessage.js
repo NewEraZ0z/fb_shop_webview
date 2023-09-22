@@ -1,7 +1,7 @@
 window.extAsyncInit = function() {
   // the Messenger Extensions JS SDK is done loading 
   MessengerExtensions.getContext('269582959293477', 
-  function success(thread_context){
+  function success(thread_context,senderID){
     // success
     $("#psid").val(thread_context.psid);
     console.log(thread_context.psid);
