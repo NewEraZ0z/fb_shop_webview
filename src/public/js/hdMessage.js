@@ -5,7 +5,7 @@ MessengerExtensions.getSupportedFeatures(function success(result) {
     MessengerExtensions.getContext('269582959293477',
       function success(thread_context) {
         // success
-        $("#psid').val(thread_context.psid);
+        $("#psid").val(thread_context.psid);
         // More code to follow
       },
       function error(err) {
