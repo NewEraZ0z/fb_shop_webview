@@ -6,6 +6,7 @@ MessengerExtensions.getSupportedFeatures(function success(result) {
       function success(thread_context) {
         // success
         $("#psid").val(thread_context.psid);
+        console.log(thread_context.psid)
         // More code to follow
       },
       function error(err) {
