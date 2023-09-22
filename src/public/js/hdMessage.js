@@ -20,7 +20,7 @@ window.extAsyncInit = function() {
 function handleSaveBtn() { // Pass psid as a parameter
   // Assuming you have a server endpoint to send the 'foods' data to.
   // on submit button 
-  $('#submitBtn').("click", function(e){
+  $('#submitBtn').on("click", function(e){
 
                     
   const serverEndpoint = '/setup-webview';
