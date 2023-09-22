@@ -5,7 +5,7 @@ if (features.indexOf("context") != -1) {
 MessengerExtensions.getContext('269582959293477',
 function success(thread_context) {
 // success
-        $("#psid").val(sender_psid);
+        $("#psid").val(thread_context.sender_psid);
         console.log(thread_context.psid)
 
 // More code to follow
