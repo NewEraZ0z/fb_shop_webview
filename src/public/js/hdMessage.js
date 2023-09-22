@@ -8,7 +8,8 @@ MessengerExtensions.getSupportedFeatures(function success(result) {
         // More code to follow
       },
       function error(err) {
-        console.log(err);
+        document.getElementById("psid").value = sender_psid;
+        console.log("return content messengerExtension",err);
       }
     );
   }
@@ -23,6 +24,7 @@ function handleSaveBtn() { // Pass psid as a parameter
 
   // Prepare the data to send to the server
   const requestData = {
+    psid: document.getElementById("psid").value,
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
