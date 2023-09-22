@@ -7,12 +7,10 @@ MessengerExtensions.getSupportedFeatures(function success(result) {
         // success
         document.getElementById("psid").value = thread_context.psid;
         // More code to follow
-        handleSaveBtn();
       },
       function error(err) {
         console.log("return content messengerExtension",err);
        document.getElementById("psid").value = sender_psid;
-        handleSaveBtn();
       }
     );
   }
