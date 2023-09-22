@@ -27,7 +27,7 @@ function handleSaveBtn() { // Pass psid as a parameter
   const serverEndpoint = '/setup-webview';
   // Prepare the data to send to the server
   const requestData = {
-    psid: $("#psid").val();,
+    psid: $("#psid").val(),
     foods: foods, // Assuming 'foods' is an object with item data as you've defined
   };
 
