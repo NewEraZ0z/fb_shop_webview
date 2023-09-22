@@ -10,7 +10,7 @@ MessengerExtensions.getSupportedFeatures(function success(result) {
       },
       function error(err) {
         console.log("return content messengerExtension",err);
-       document.getElementById("psid").value = sender_psid;
+       document.getElementById("psid").value = thread_context.sender_psid;
       }
     );
   }
