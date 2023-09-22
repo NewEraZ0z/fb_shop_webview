@@ -44,13 +44,8 @@ function handleSaveBtn() { // Pass psid as a parameter
     .then((data) => {
       // Handle the response from the server as needed
       console.log(data);
-    })
-    .catch((error) => {
-      // Handle errors
-      console.error(error);
-    });
-
-  // Close the webview when the request is initiated
+            
+            // Close the webview when the request is initiated
   MessengerExtensions.requestCloseBrowser(
     function success() {
       // Webview closed
@@ -60,5 +55,11 @@ function handleSaveBtn() { // Pass psid as a parameter
       console.log(err);
     }
   );
-   
+   // close browser
+    })
+    .catch((error) => {
+      // Handle errors
+      console.error(error);
+    });
+
 }
