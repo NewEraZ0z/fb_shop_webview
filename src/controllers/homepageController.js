@@ -2,9 +2,9 @@ require("dotenv").config();
 //import request from "request";
 const request = require("request");
 
-
+ const { default: fetch } = await import('node-fetch');
 // Import the necessary modules or functions
-const { generateCheckoutUrl } = require("../chargilypay.js");
+//const { generateCheckoutUrl } = require("../chargilypay.js");
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
