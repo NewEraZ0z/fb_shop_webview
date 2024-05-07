@@ -1,5 +1,6 @@
-// const fetch = require('node-fetch'); // Import the node-fetch library
-import fetch from "node-fetch";
+import('node-fetch')
+  .then((nodeFetch) => {
+    const fetch = nodeFetch.default;
 
 const generateCheckoutUrl = async () => {
   const options = {
@@ -25,20 +26,23 @@ const generateCheckoutUrl = async () => {
   }
 };
 
-// Usage example
-generateCheckoutUrl()
-  .then(checkoutUrl => {
-    console.log("Checkout URL:", checkoutUrl);
-    // Further processing with the checkout URL
-  })
-  .catch(error => {
-    console.error("Error generating checkout URL:", error);
-  });
+// // Usage example
+// generateCheckoutUrl()
+//   .then(checkoutUrl => {
+//     console.log("Checkout URL:", checkoutUrl);
+//     // Further processing with the checkout URL
+//   })
+//   .catch(error => {
+//     console.error("Error generating checkout URL:", error);
+//   });
 
 module.exports = {
   generateCheckoutUrl: generateCheckoutUrl
 };
-
+ })
+  .catch((error) => {
+    console.error('Error loading node-fetch:', error);
+  });
 
 // const request = require('request');
 
