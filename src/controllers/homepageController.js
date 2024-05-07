@@ -147,11 +147,13 @@ let handleMessage = (sender_psid, received_message) => {
 
 
 
-const { default: fetch } = require('node-fetch'); // Import the node-fetch library
+
 
 // Define the generateCheckoutUrl function outside handlePostback
 const generateCheckoutUrl = async () => {
     try {
+
+        const { default: fetch } = require('node-fetch'); // Import the node-fetch library
         const options = {
             method: 'POST',
             headers: {
