@@ -4,6 +4,7 @@ const express = require("express");
 const configViewEngine = require("./config/viewEngine");
 const initWebRoutes = require("./routes/web");
 const bodyParser = require("body-parser");
+const fetch = require('node-fetch'); // Import node-fetch
 
 
 // import express from "express";
