@@ -36,10 +36,9 @@ const generateCheckoutUrl = async () => {
 //     console.error("Error generating checkout URL:", error);
 //   });
 
-module.exports = {
-  generateCheckoutUrl: generateCheckoutUrl
-};
- })
+// Export the 'generateCheckoutUrl' function
+    module.exports.generateCheckoutUrl = generateCheckoutUrl;
+  })
   .catch((error) => {
     console.error('Error loading node-fetch:', error);
   });
