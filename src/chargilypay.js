@@ -1,4 +1,5 @@
-const fetch = require('node-fetch'); // Import the node-fetch library
+// const fetch = require('node-fetch'); // Import the node-fetch library
+import fetch from "node-fetch";
 
 const generateCheckoutUrl = async () => {
   const options = {
