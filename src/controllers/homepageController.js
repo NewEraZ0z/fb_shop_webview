@@ -2,7 +2,6 @@ require("dotenv").config();
 //import request from "request";
 const request = require("request");
 
- const { default: fetch } = await import('node-fetch');
 // Import the necessary modules or functions
 //const { generateCheckoutUrl } = require("../chargilypay.js");
 
@@ -161,8 +160,37 @@ let handlePostback = (sender_psid, received_postback) => {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'Order Now') {
 
-     // Generate checkout URL using the logic from chargilypay.js file
-        let checkoutUrl = generateCheckoutUrl();
+      const generateCheckoutUrl = async () => {
+
+  try {
+    // Import 'node-fetch' dynamically
+    const { default: fetch } = await import('node-fetch');
+
+  const options = {
+    method: 'POST',
+    headers: {Authorization: 'Bearer test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeB', 'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      "amount": 2000,
+      "currency": "dzd",
+      "payment_method": "edahabia",
+      "collect_shipping_address": true,
+      "success_url": "https://www.facebook.com"
+
+    })
+  };
+
+    const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
+    const responseData = await response.json();
+    return responseData.checkout_url; // Return the checkout URL
+  } catch (err) {
+    console.error(err);
+    throw err; // Throw the error to handle it outside of this function
+  }
+};
+
+     
+     // // Generate checkout URL using the logic from chargilypay.js file
+     //    let checkoutUrl = generateCheckoutUrl();
         
               response = {
                        "attachment":{
@@ -174,7 +202,7 @@ let handlePostback = (sender_psid, received_postback) => {
                                     {
                                      "type":"web_url",
                                      //"url": WEBVIEW_URL + "/" + sender_psid,
-                                     "url": checkoutUrl,
+                                     "url": generateCheckoutUrl,
                                      "title":"Order Now",
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
