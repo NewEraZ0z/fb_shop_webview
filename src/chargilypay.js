@@ -34,10 +34,9 @@ generateCheckoutUrl()
     console.error("Error generating checkout URL:", error);
   });
 
-
-
-
-
+module.exports = {
+  generateCheckoutUrl: generateCheckoutUrl
+};
 
 
 // const request = require('request');
