@@ -2,6 +2,10 @@ require("dotenv").config();
 //import request from "request";
 const request = require("request");
 
+
+// Import the necessary modules or functions
+const { generateCheckoutUrl } = require("../chargilypay.js");
+
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const WEBVIEW_URL = process.env.WEBVIEW_URL;
@@ -156,6 +160,10 @@ let handlePostback = (sender_psid, received_postback) => {
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'Order Now') {
+
+     // Generate checkout URL using the logic from chargilypay.js file
+        let checkoutUrl = generateCheckoutUrl();
+        
               response = {
                        "attachment":{
                            "type":"template",
@@ -165,7 +173,8 @@ let handlePostback = (sender_psid, received_postback) => {
                                "buttons":[
                                     {
                                      "type":"web_url",
-                                     "url": WEBVIEW_URL + "/" + sender_psid,
+                                     //"url": WEBVIEW_URL + "/" + sender_psid,
+                                     "url"checkoutUrl,
                                      "title":"Order Now",
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
@@ -277,5 +286,6 @@ module.exports = {
     postWebhook: postWebhook,
     getWebViewPage: getWebViewPage,
     handleWebView: handleWebView,
-    handleWebInfo: handleWebInfo
+    handleWebInfo: handleWebInfo,
+    handlePostback
 };
