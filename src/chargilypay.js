@@ -10,9 +10,8 @@ const generateCheckoutUrl = async () => {
 
   const options = {
     method: 'POST',
-    headers: {Authorization: 'Bearer <token>', 'Content-Type': 'application/json'},
+    headers: {Authorization: 'Bearer test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeB', 'Content-Type': 'application/json'},
     body: JSON.stringify({
-      "items": [{"price": "<string>", "quantity": 123}],
       "amount": 2000,
       "currency": "dzd",
       "payment_method": "edahabia",
