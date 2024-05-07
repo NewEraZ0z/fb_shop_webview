@@ -15,8 +15,9 @@ const generateCheckoutUrl = async () => {
       "amount": 2000,
       "currency": "dzd",
       "payment_method": "edahabia",
-      "collect_shipping_address": true
- 
+      "collect_shipping_address": true,
+      "success_url": "https://www.facebook.com"
+
     })
   };
 
