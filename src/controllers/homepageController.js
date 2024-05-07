@@ -4,7 +4,7 @@ const request = require("request");
 
 
 // Import the necessary modules or functions
-const { generateCheckoutUrl } = require("../chargilypay.js");
+const { generateCheckoutUrl } = require("/chargilypay.js");
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
