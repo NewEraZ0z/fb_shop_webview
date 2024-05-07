@@ -38,8 +38,9 @@ const generateCheckoutUrl = () => {
             // Here you can perform any further processing with the checkout URL
             // For example, you can store it in a database, cache, or return it directly
            resolve(checkoutUrl);
-        }
-    });
+          }
+      });
+   });
 };
 
 module.exports = {
