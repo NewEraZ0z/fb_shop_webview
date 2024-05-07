@@ -2,6 +2,7 @@ const request = require('request');
 
 // Function to generate checkout URL
 const generateCheckoutUrl = () => {
+    return new Promise((resolve, reject) => {
     // Define the payload for the Chargily Pay API request
     const payload = {
         "amount": 5000,
@@ -29,13 +30,14 @@ const generateCheckoutUrl = () => {
     }, (error, response, body) => {
         if (error) {
             console.error("Error:", error);
+            reject(error);
         } else {
             // Extract the checkout URL from the response
             const checkoutUrl = body.checkout_url;
             console.log("Checkout URL:", checkoutUrl);
             // Here you can perform any further processing with the checkout URL
             // For example, you can store it in a database, cache, or return it directly
-            return checkoutUrl;
+           resolve(checkoutUrl);
         }
     });
 };
