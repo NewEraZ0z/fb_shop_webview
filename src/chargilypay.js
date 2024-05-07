@@ -21,7 +21,6 @@ const generateCheckoutUrl = async () => {
     })
   };
 
-  try {
     const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
     const responseData = await response.json();
     return responseData.checkout_url; // Return the checkout URL
