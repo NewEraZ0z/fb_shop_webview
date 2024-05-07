@@ -1,8 +1,13 @@
-import('node-fetch')
-  .then((nodeFetch) => {
-    const fetch = nodeFetch.default;
+// import('node-fetch')
+//   .then((nodeFetch) => {
+//     const fetch = nodeFetch.default;
 
 const generateCheckoutUrl = async () => {
+
+  try {
+    // Import 'node-fetch' dynamically
+    const { default: fetch } = await import('node-fetch');
+
   const options = {
     method: 'POST',
     headers: {Authorization: 'Bearer <token>', 'Content-Type': 'application/json'},
@@ -25,7 +30,11 @@ const generateCheckoutUrl = async () => {
     throw err; // Throw the error to handle it outside of this function
   }
 };
-
+// Export the 'generateCheckoutUrl' function
+module.exports = {
+  generateCheckoutUrl: generateCheckoutUrl
+};
+  
 // // Usage example
 // generateCheckoutUrl()
 //   .then(checkoutUrl => {
@@ -36,12 +45,12 @@ const generateCheckoutUrl = async () => {
 //     console.error("Error generating checkout URL:", error);
 //   });
 
-// Export the 'generateCheckoutUrl' function
-    module.exports.generateCheckoutUrl = generateCheckoutUrl;
-  })
-  .catch((error) => {
-    console.error('Error loading node-fetch:', error);
-  });
+// // Export the 'generateCheckoutUrl' function
+//     module.exports.generateCheckoutUrl = generateCheckoutUrl;
+//   })
+//   .catch((error) => {
+//     console.error('Error loading node-fetch:', error);
+//   });
 
 // const request = require('request');
 
