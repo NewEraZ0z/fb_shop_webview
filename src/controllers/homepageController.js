@@ -146,6 +146,42 @@ let handleMessage = (sender_psid, received_message) => {
 };
 
 
+
+const { default: fetch } = require('node-fetch'); // Import the node-fetch library
+
+// Define the generateCheckoutUrl function outside handlePostback
+const generateCheckoutUrl = async () => {
+    try {
+        const options = {
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeB',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                amount: 2000,
+                currency: 'dzd',
+                payment_method: 'edahabia',
+                collect_shipping_address: true,
+                success_url: 'https://fb-shop-webview.onrender.com'
+            })
+        };
+
+        const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
+        const responseData = await response.json();
+        return responseData.checkout_url; // Return the checkout URL
+    } catch (err) {
+        console.error(err);
+        throw err; // Throw the error to handle it outside of this function
+    }
+};
+
+
+
+
+
+
+
 // Handles messaging_postbacks events
 let handlePostback = (sender_psid, received_postback) => {
     let response;
@@ -159,38 +195,10 @@ let handlePostback = (sender_psid, received_postback) => {
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'Order Now') {
-
-      const generateCheckoutUrl = async () => {
-
-  try {
-    // Import 'node-fetch' dynamically
-    const { default: fetch } = await import('node-fetch');
-
-  const options = {
-    method: 'POST',
-    headers: {Authorization: 'Bearer test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeB', 'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      "amount": 2000,
-      "currency": "dzd",
-      "payment_method": "edahabia",
-      "collect_shipping_address": true,
-      "success_url": "https://www.facebook.com"
-
-    })
-  };
-
-    const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
-    const responseData = await response.json();
-    return responseData.checkout_url; // Return the checkout URL
-  } catch (err) {
-    console.error(err);
-    throw err; // Throw the error to handle it outside of this function
-  }
-};
-
      
-     // // Generate checkout URL using the logic from chargilypay.js file
-     //    let checkoutUrl = generateCheckoutUrl();
+     try {
+            // Generate checkout URL asynchronously
+            const checkoutUrl = await generateCheckoutUrl();
         
               response = {
                        "attachment":{
@@ -202,16 +210,22 @@ let handlePostback = (sender_psid, received_postback) => {
                                     {
                                      "type":"web_url",
                                      //"url": WEBVIEW_URL + "/" + sender_psid,
-                                     "url": generateCheckoutUrl,
+                                     "url": checkoutUrl,
                                      "title":"Order Now",
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
-                                    },
+                                            },
                                         ]
                                   }
                        }
              }; 
+    }  catch (error) {
+            // Handle any errors that occur during URL generation
+            console.error('Error generating checkout URL:', error);
+            response = { text: 'Oops, something went wrong while generating the checkout URL.' };
+        }
     }
+
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
 };
