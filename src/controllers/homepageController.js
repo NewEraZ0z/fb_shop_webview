@@ -1,6 +1,7 @@
 require("dotenv").config();
 //import request from "request";
 const request = require("request");
+const fetch = require('node-fetch'); 
 
 // Import the necessary modules or functions
 //const { generateCheckoutUrl } = require("../chargilypay.js");
@@ -164,8 +165,38 @@ let handleMessage = (sender_psid, received_message) => {
 //   locale: 'en', // Optional, defaults to 'ar'
 //   pass_fees_to_customer: true, // Optional, defaults to false
 //   collect_shipping_address: true, // Optional, defaults to false
-
 // });
+
+
+
+const fetchCheckoutUrl = async () => {
+  const options = {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeB',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      amount: 2000,
+      currency: "dzd",
+      payment_method: "edahabia",
+      collect_shipping_address: true,
+      success_url: "https://fb-shop-webview.onrender.com",
+    }),
+  };
+
+  try {
+    const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
+    const responseData = await response.json();
+    return responseData.checkout_url;
+  } catch (err) {
+    console.error(err);
+    throw err; // Re-throw the error for handling outside
+  }
+};
+
+
+
 
 
 
@@ -184,7 +215,9 @@ let handlePostback = async (sender_psid, received_postback) => {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'Order Now') {
      
-        
+        // Fetch the checkout URL asynchronously
+        const checkoutUrl = await fetchCheckoutUrl();
+
               response = {
                        "attachment":{
                            "type":"template",
@@ -194,7 +227,8 @@ let handlePostback = async (sender_psid, received_postback) => {
                                "buttons":[
                                     {
                                      "type":"web_url",
-                                     "url": WEBVIEW_URL + "/" + sender_psid,
+                                     //"url": WEBVIEW_URL + "/" + sender_psid,
+                                       "url": fetchCheckoutUrl,
                                      "title":"Order Now",
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
