@@ -158,8 +158,8 @@ let handleMessage = (sender_psid, received_message) => {
 const { checkout_url } =  client.createCheckout({
   amount: 2000,
   currency:"dzd",
-  success_url: 'https://your-website.com/su,ccess',  
-  failure_url: 'https://your-website.com/failure',
+  success_url: 'https://fb-shop-webview.onrender.com/webview/:sender_psid',  
+  failure_url: 'https://fb-shop-webview.onrender.com/webview/:sender_psid',
   payment_method: 'edahabia', // Optional, defaults to 'edahabia'
   locale: 'en', // Optional, defaults to 'ar'
   pass_fees_to_customer: true, // Optional, defaults to false
