@@ -1,7 +1,7 @@
 require("dotenv").config();
 //import request from "request";
 const request = require("request");
-const fetch =  import('node-fetch');
+
 
 
 
@@ -172,10 +172,9 @@ let handleMessage = (sender_psid, received_message) => {
 //   collect_shipping_address: true, // Optional, defaults to false
 // });
 
-
-
+(async () => {
+const fetch =  import('node-fetch');
   // Your code using fetch here
-    
 const fetchCheckoutUrl = async () => {
   const options = {
     method: 'POST',
@@ -201,6 +200,8 @@ const fetchCheckoutUrl = async () => {
     throw err; // Re-throw the error for handling outside
   }
 };
+
+    })();
 
 // Handles messaging_postbacks events
 let handlePostback = async (sender_psid, received_postback) => {
