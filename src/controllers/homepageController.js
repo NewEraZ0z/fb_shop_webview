@@ -2,6 +2,17 @@ require("dotenv").config();
 //import request from "request";
 const request = require("request");
 
+const { generateCheckoutUrl } = require('./chargilypay.js'); // Assuming 'generateCheckoutUrl' is exported
+
+(async () => {
+  try {
+    const checkoutUrl = await generateCheckoutUrl();
+    console.log("Checkout URL:", checkoutUrl);
+  } catch (error) {
+    console.error("Error generating checkout URL:", error);
+  }
+})();
+
 
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
