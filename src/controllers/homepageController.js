@@ -172,7 +172,7 @@ let handleMessage = (sender_psid, received_message) => {
 // });
 
 
-const fetch = await import('node-fetch');
+const fetch =  import('node-fetch');
   // Your code using fetch here
     
 const fetchCheckoutUrl = async () => {
