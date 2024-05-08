@@ -2,7 +2,7 @@ require("dotenv").config();
 //import request from "request";
 const request = require("request");
 
-const { generateCheckoutUrl } = require('./chargilypay.js'); // Assuming 'generateCheckoutUrl' is exported
+const { generateCheckoutUrl } = require('../chargilypay.js'); // Assuming 'generateCheckoutUrl' is exported
 
 (async () => {
   try {
