@@ -4,7 +4,7 @@ const request = require("request");
 
 // Import the necessary modules or functions
 //const { generateCheckoutUrl } = require("../chargilypay.js");
-import { ChargilyClient } from '@chargily/chargily-pay';
+const { ChargilyClient } = require("@chargily/chargily-pay");
 
 const client = new ChargilyClient({
   api_key: 'test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeBE',
