@@ -172,79 +172,77 @@ let handleMessage = (sender_psid, received_message) => {
 //   collect_shipping_address: true, // Optional, defaults to false
 // });
 
+
 (async () => {
-const fetch =  import('node-fetch');
-  // Your code using fetch here
-const fetchCheckoutUrl = async () => {
-  const options = {
-    method: 'POST',
-    headers: {
-      Authorization: 'Bearer test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeB',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      amount: 2000,
-      currency: "dzd",
-      payment_method: "edahabia",
-      collect_shipping_address: true,
-      success_url: "https://www.facebook.com",
-    }),
+  const fetch = await import('node-fetch'); // Corrected async import syntax
+
+  const fetchCheckoutUrl = async () => {
+    const options = {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeB', // Replace with your secret key
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        amount: 2000,
+        currency: "dzd",
+        payment_method: "edahabia",
+        collect_shipping_address: true,
+        success_url: "https://fb-shop-webview.onrender.com",
+      }),
+    };
+
+    try {
+      const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
+      const responseData = await response.json();
+      return responseData.checkout_url;
+    } catch (err) {
+      console.error(err);
+      throw err; // Re-throw the error for handling outside
+    }
   };
 
-  try {
-    const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
-    const responseData = await response.json();
-    return responseData.checkout_url;
-  } catch (err) {
-    console.error(err);
-    throw err; // Re-throw the error for handling outside
-  }
-};
+  // Handles messaging_postbacks events
+  let handlePostback = async (sender_psid, received_postback) => {
+    let response;
 
-    })();
+    // Get the payload for the postback
+    let payload = received_postback.payload;
 
-// Handles messaging_postbacks events
-let handlePostback = async (sender_psid, received_postback) => {
-  let response;
+    // Set the response based on the postback payload
+    if (payload === 'yes') {
+      response = { "text": "Thanks!" }
+    } else if (payload === 'no') {
+      response = { "text": "Oops, try sending another image." }
+    } else if (payload === 'Order Now') {
 
-  // Get the payload for the postback
-  let payload = received_postback.payload;
+      // Fetch the checkout URL asynchronously
+      const checkoutUrl = await fetchCheckoutUrl();
 
-  // Set the response based on the postback payload
-  if (payload === 'yes') {
-    response = { "text": "Thanks!" }
-  } else if (payload === 'no') {
-    response = { "text": "Oops, try sending another image." }
-  } else if (payload === 'Order Now') {
-
-    // Fetch the checkout URL asynchronously
-    const checkoutUrl = await fetchCheckoutUrl();
-
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "button",
-          "text": "What do you want to do next?",
-          "buttons": [
-            {
-              "type": "web_url",
-              "url": checkoutUrl, // Use the fetched checkout URL here
-              "title": "Order Now",
-              "messenger_extensions": true,
-              "webview_height_ratio": "tall",
-            },
-          ],
+      response = {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "button",
+            "text": "What do you want to do next?",
+            "buttons": [
+              {
+                "type": "web_url",
+                "url": checkoutUrl, // Use the fetched checkout URL
+                "title": "Order Now",
+                "messenger_extensions": true,
+                "webview_height_ratio": "tall",
+              },
+            ],
+          },
         },
-      },
-    };
-  }
+      };
+    }
 
-  // Send the message to acknowledge the postback
-  callSendAPI(sender_psid, response);
-};
-
-
+    // Send the message to acknowledge the postback
+    callSendAPI(sender_psid, response);
+  };
+})();
 
 // Sends response messages via the Send API
 let callSendAPI = (sender_psid, response) => {
