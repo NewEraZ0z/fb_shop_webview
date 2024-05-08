@@ -170,7 +170,15 @@ let handlePostback = (sender_psid, received_postback) => {
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'Order Now') {
-        const checkoutUrl = await generateCheckoutUrl();
+        (async () => {
+  try {
+    const checkoutUrl = await generateCheckoutUrl();
+    console.log("Checkout URL:", checkoutUrl);
+  } catch (error) {
+    console.error("Error generating checkout URL:", error);
+  }
+})();
+
               response = {
                        "attachment":{
                            "type":"template",
