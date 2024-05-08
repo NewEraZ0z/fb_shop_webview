@@ -154,8 +154,6 @@ let handleMessage = (sender_psid, received_message) => {
 
 
 
-// Define checkout_url in an accessible scope
-let checkout_url;
 // Your code to obtain the checkout_url
 const { checkout_url } = await client.createCheckout({
   amount: 2000,
