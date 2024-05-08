@@ -7,7 +7,7 @@ const request = require("request");
 import { ChargilyClient } from '@chargily/chargily-pay';
 
 const client = new ChargilyClient({
-  api_key: 'YOUR_API_KEY_HERE',
+  api_key: 'test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeBE',
   mode: 'test', // Change to 'live' when deploying your application
 });
 
@@ -154,35 +154,20 @@ let handleMessage = (sender_psid, received_message) => {
 
 
 
+// Define checkout_url in an accessible scope
+let checkout_url;
+// Your code to obtain the checkout_url
+const { checkout_url } = await client.createCheckout({
+  amount: 2000,
+  currency:"dzd",
+  success_url: 'https://your-website.com/su,ccess',  
+  failure_url: 'https://your-website.com/failure',
+  payment_method: 'edahabia', // Optional, defaults to 'edahabia'
+  locale: 'en', // Optional, defaults to 'ar'
+  pass_fees_to_customer: true, // Optional, defaults to false
+  collect_shipping_address: true, // Optional, defaults to false
 
-// Define the generateCheckoutUrl function outside handlePostback
-const generateCheckoutUrl = async () => {
-    try {
-
-        const { default: fetch } = require('node-fetch'); // Import the node-fetch library
-        const options = {
-            method: 'POST',
-            headers: {
-                Authorization: 'Bearer test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeB',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                amount: 2000,
-                currency: 'dzd',
-                payment_method: 'edahabia',
-                collect_shipping_address: true,
-                success_url: 'https://fb-shop-webview.onrender.com'
-            })
-        };
-
-        const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
-        const responseData = await response.json();
-        return responseData.checkout_url; // Return the checkout URL
-    } catch (err) {
-        console.error(err);
-        throw err; // Throw the error to handle it outside of this function
-    }
-};
+});
 
 
 
@@ -204,9 +189,6 @@ let handlePostback = async (sender_psid, received_postback) => {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'Order Now') {
      
-     try {
-            // Generate checkout URL asynchronously
-            const checkoutUrl = await generateCheckoutUrl();
         
               response = {
                        "attachment":{
@@ -218,7 +200,7 @@ let handlePostback = async (sender_psid, received_postback) => {
                                     {
                                      "type":"web_url",
                                      //"url": WEBVIEW_URL + "/" + sender_psid,
-                                     "url": checkoutUrl,
+                                     "url": checkout_url,
                                      "title":"Order Now",
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
@@ -227,13 +209,8 @@ let handlePostback = async (sender_psid, received_postback) => {
                                   }
                        }
              }; 
-    }  catch (error) {
-            // Handle any errors that occur during URL generation
-            console.error('Error generating checkout URL:', error);
-            response = { text: 'Oops, something went wrong while generating the checkout URL.' };
-        }
+    
     }
-
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
 };
