@@ -29,6 +29,10 @@ const generateCheckoutUrl = async () => {
     throw err; // Throw the error to handle it outside of this function
   }
 };
+
+  };
+
+        
 // Export the 'generateCheckoutUrl' function
 module.exports = {
   generateCheckoutUrl: generateCheckoutUrl
