@@ -179,7 +179,7 @@ let handlePostback = (sender_psid, received_postback) => {
                                "buttons":[
                                     {
                                      "type":"web_url",
-                                     "url": WEBVIEW_URL + "/" + sender_psid,
+                                     "url": checkoutUrl,
                                      "title":"Order Now",
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
