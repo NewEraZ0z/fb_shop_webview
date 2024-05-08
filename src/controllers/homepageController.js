@@ -343,5 +343,4 @@ module.exports = {
     getWebViewPage: getWebViewPage,
     handleWebView: handleWebView,
     handleWebInfo: handleWebInfo,
-    handlePostback
 };
