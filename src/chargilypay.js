@@ -30,7 +30,7 @@ const generateCheckoutUrl = async () => {
   }
 };
 
-  };
+  }
 
         
 // Export the 'generateCheckoutUrl' function
