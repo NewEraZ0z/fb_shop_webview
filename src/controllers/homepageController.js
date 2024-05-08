@@ -170,6 +170,12 @@ let handlePostback = (sender_psid, received_postback) => {
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'Order Now') {
+
+      try {
+      // Generate checkout URL using promise
+      generateCheckoutUrl()
+        .then(checkoutUrl => {
+      
               response = {
                        "attachment":{
                            "type":"template",
@@ -188,11 +194,23 @@ let handlePostback = (sender_psid, received_postback) => {
                                   }
                        }
              }; 
-    }
+    
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
-};
+})
+        .catch(error => {
+          console.error("Error generating checkout URL:", error);
+          // Handle the error appropriately (e.g., send an error message)
+        });
+    } catch (error) {
+      console.error("Error generating checkout URL:", error);
+      // Handle the error appropriately (e.g., send an error message)
+    }
+  }
 
+
+
+      
 // Sends response messages via the Send API
 let callSendAPI = (sender_psid, response) => {
     // Construct the message body
