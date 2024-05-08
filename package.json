@@ -1,5 +1,5 @@
 {
-  "type": "module",
+  
   "name": "quickstartmessengerplatform",
   "version": "1.0.0",
   "description": "a quickstart node.js project with Facebook Messenger Platform",
