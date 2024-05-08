@@ -171,8 +171,8 @@ let handleMessage = (sender_psid, received_message) => {
 //   collect_shipping_address: true, // Optional, defaults to false
 // });
 
-(async () => {
-  const fetch = await import('node-fetch');
+
+const fetch = await import('node-fetch');
   // Your code using fetch here
     
 const fetchCheckoutUrl = async () => {
@@ -201,7 +201,7 @@ const fetchCheckoutUrl = async () => {
   }
 };
 
-})();
+
 
 
 
