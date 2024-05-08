@@ -4,12 +4,12 @@ const request = require("request");
 
 // Import the necessary modules or functions
 //const { generateCheckoutUrl } = require("../chargilypay.js");
-const { ChargilyClient } = require("@chargily/chargily-pay");
+// const { ChargilyClient } = require("@chargily/chargily-pay");
 
-const client = new ChargilyClient({
-  api_key: 'test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeBE',
-  mode: 'test', // Change to 'live' when deploying your application
-});
+// const client = new ChargilyClient({
+//   api_key: 'test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeBE',
+//   mode: 'test', // Change to 'live' when deploying your application
+// });
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -154,21 +154,18 @@ let handleMessage = (sender_psid, received_message) => {
 
 
 
-// Your code to obtain the checkout_url
-const { checkout_url } =  client.createCheckout({
-  amount: 2000,
-  currency:"dzd",
-  success_url: 'https://fb-shop-webview.onrender.com/webview/:sender_psid',  
-  failure_url: 'https://fb-shop-webview.onrender.com/webview/:sender_psid',
-  payment_method: 'edahabia', // Optional, defaults to 'edahabia'
-  locale: 'en', // Optional, defaults to 'ar'
-  pass_fees_to_customer: true, // Optional, defaults to false
-  collect_shipping_address: true, // Optional, defaults to false
+// // Your code to obtain the checkout_url
+// const { checkout_url } =  client.createCheckout({
+//   amount: 2000,
+//   currency:"dzd",
+//   success_url: 'https://fb-shop-webview.onrender.com/webview/:sender_psid',  
+//   failure_url: 'https://fb-shop-webview.onrender.com/webview/:sender_psid',
+//   payment_method: 'edahabia', // Optional, defaults to 'edahabia'
+//   locale: 'en', // Optional, defaults to 'ar'
+//   pass_fees_to_customer: true, // Optional, defaults to false
+//   collect_shipping_address: true, // Optional, defaults to false
 
-});
-
-
-
+// });
 
 
 
@@ -197,8 +194,7 @@ let handlePostback = async (sender_psid, received_postback) => {
                                "buttons":[
                                     {
                                      "type":"web_url",
-                                     //"url": WEBVIEW_URL + "/" + sender_psid,
-                                     "url": checkout_url,
+                                     "url": WEBVIEW_URL + "/" + sender_psid,
                                      "title":"Order Now",
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
