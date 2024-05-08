@@ -155,7 +155,7 @@ let handleMessage = (sender_psid, received_message) => {
 
 
 // Your code to obtain the checkout_url
-const { checkout_url } = await client.createCheckout({
+const { checkout_url } =  client.createCheckout({
   amount: 2000,
   currency:"dzd",
   success_url: 'https://your-website.com/su,ccess',  
