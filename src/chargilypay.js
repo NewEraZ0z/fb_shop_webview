@@ -32,10 +32,10 @@ const generateCheckoutUrl = async () => {
 
 
         
-// // Export the 'generateCheckoutUrl' function
-// module.exports = {
-//   generateCheckoutUrl: generateCheckoutUrl
-// };
+// Export the 'generateCheckoutUrl' function
+module.exports = {
+  generateCheckoutUrl: generateCheckoutUrl
+};
 })
   .catch((error) => {
     console.error('Error loading node-fetch:', error);
@@ -118,9 +118,3 @@ const generateCheckoutUrl = async () => {
 // };
 
 
-
-
-// Export the 'generateCheckoutUrl' function
-module.exports = {
-  generateCheckoutUrl: generateCheckoutUrl
-};
