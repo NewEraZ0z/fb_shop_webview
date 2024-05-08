@@ -4,19 +4,6 @@ const request = require("request");
 
 
 
-
-
-
-
-// Import the necessary modules or functions
-//const { generateCheckoutUrl } = require("../chargilypay.js");
-// const { ChargilyClient } = require("@chargily/chargily-pay");
-
-// const client = new ChargilyClient({
-//   api_key: 'test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeB',
-//   mode: 'test', // Change to 'live' when deploying your application
-// });
-
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const WEBVIEW_URL = process.env.WEBVIEW_URL;
@@ -159,51 +146,8 @@ let handleMessage = (sender_psid, received_message) => {
 
 
 
-
-// // Your code to obtain the checkout_url
-// const { checkout_url } =  client.createCheckout({
-//   amount: 2000,
-//   currency:"dzd",
-//   success_url: 'https://fb-shop-webview.onrender.com/webview/:sender_psid',  
-//   failure_url: 'https://fb-shop-webview.onrender.com/webview/:sender_psid',
-//   payment_method: 'edahabia', // Optional, defaults to 'edahabia'
-//   locale: 'en', // Optional, defaults to 'ar'
-//   pass_fees_to_customer: true, // Optional, defaults to false
-//   collect_shipping_address: true, // Optional, defaults to false
-// });
-
-
-(async () => {
-  const fetch = await import('node-fetch'); // Corrected async import syntax
-
-  const fetchCheckoutUrl = async () => {
-    const options = {
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeB', // Replace with your secret key
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        amount: 2000,
-        currency: "dzd",
-        payment_method: "edahabia",
-        collect_shipping_address: true,
-        success_url: "https://fb-shop-webview.onrender.com",
-      }),
-    };
-
-    try {
-      const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
-      const responseData = await response.json();
-      return responseData.checkout_url;
-    } catch (err) {
-      console.error(err);
-      throw err; // Re-throw the error for handling outside
-    }
-  };
-
-  // Handles messaging_postbacks events
-  let handlePostback = async (sender_psid, received_postback) => {
+// Handles messaging_postbacks events
+let handlePostback = (sender_psid, received_postback) => {
     let response;
 
     // Get the payload for the postback
@@ -211,38 +155,32 @@ let handleMessage = (sender_psid, received_message) => {
 
     // Set the response based on the postback payload
     if (payload === 'yes') {
-      response = { "text": "Thanks!" }
+        response = { "text": "Thanks!" }
     } else if (payload === 'no') {
-      response = { "text": "Oops, try sending another image." }
+        response = { "text": "Oops, try sending another image." }
     } else if (payload === 'Order Now') {
-
-      // Fetch the checkout URL asynchronously
-      const checkoutUrl = await fetchCheckoutUrl();
-
-      response = {
-        "attachment": {
-          "type": "template",
-          "payload": {
-            "template_type": "button",
-            "text": "What do you want to do next?",
-            "buttons": [
-              {
-                "type": "web_url",
-                "url": checkoutUrl, // Use the fetched checkout URL
-                "title": "Order Now",
-                "messenger_extensions": true,
-                "webview_height_ratio": "tall",
-              },
-            ],
-          },
-        },
-      };
+              response = {
+                       "attachment":{
+                           "type":"template",
+                           "payload":{
+                               "template_type":"button",
+                               "text":"What do you want to do next?",
+                               "buttons":[
+                                    {
+                                     "type":"web_url",
+                                     "url": WEBVIEW_URL + "/" + sender_psid,
+                                     "title":"Order Now",
+                                     "messenger_extensions": true,
+                                     "webview_height_ratio": "tall",
+                                    },
+                                        ]
+                                  }
+                       }
+             }; 
     }
-
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
-  };
-})();
+};
 
 // Sends response messages via the Send API
 let callSendAPI = (sender_psid, response) => {
