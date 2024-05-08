@@ -4,14 +4,14 @@ const request = require("request");
 
 const { generateCheckoutUrl } = require('../chargilypay.js'); // Assuming 'generateCheckoutUrl' is exported
 
-(async () => {
-  try {
-    const checkoutUrl = await generateCheckoutUrl();
-    console.log("Checkout URL:", checkoutUrl);
-  } catch (error) {
-    console.error("Error generating checkout URL:", error);
-  }
-})();
+// (async () => {
+//   try {
+//     const checkoutUrl = await generateCheckoutUrl();
+//     console.log("Checkout URL:", checkoutUrl);
+//   } catch (error) {
+//     console.error("Error generating checkout URL:", error);
+//   }
+// })();
 
 
 
@@ -158,7 +158,7 @@ let handleMessage = (sender_psid, received_message) => {
 
 
 // Handles messaging_postbacks events
-let handlePostback = (sender_psid, received_postback) => {
+let handlePostback = async (sender_psid, received_postback) => {
     let response;
 
     // Get the payload for the postback
@@ -170,15 +170,10 @@ let handlePostback = (sender_psid, received_postback) => {
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'Order Now') {
-        (async () => {
+   
   try {
     const checkoutUrl = await generateCheckoutUrl();
-    console.log("Checkout URL:", checkoutUrl);
-  } catch (error) {
-    console.error("Error generating checkout URL:", error);
-  }
-})();
-
+    
               response = {
                        "attachment":{
                            "type":"template",
@@ -193,11 +188,15 @@ let handlePostback = (sender_psid, received_postback) => {
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
                                     },
-                                        ]
-                                  }
-                       }
+                                  ]
+                            }
+                     }
              }; 
-        }
+        } catch (error) {
+      console.error("Error generating checkout URL:", error);
+      // Handle the error appropriately (e.g., send an error message)
+    }
+  }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
 };
