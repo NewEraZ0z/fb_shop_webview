@@ -1,6 +1,7 @@
 require("dotenv").config();
 //import request from "request";
 const request = require("request");
+const fetch =  import('node-fetch');
 
 
 
@@ -12,7 +13,7 @@ const request = require("request");
 // const { ChargilyClient } = require("@chargily/chargily-pay");
 
 // const client = new ChargilyClient({
-//   api_key: 'test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeBE',
+//   api_key: 'test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeB',
 //   mode: 'test', // Change to 'live' when deploying your application
 // });
 
@@ -172,7 +173,7 @@ let handleMessage = (sender_psid, received_message) => {
 // });
 
 
-const fetch =  import('node-fetch');
+
   // Your code using fetch here
     
 const fetchCheckoutUrl = async () => {
@@ -187,7 +188,7 @@ const fetchCheckoutUrl = async () => {
       currency: "dzd",
       payment_method: "edahabia",
       collect_shipping_address: true,
-      success_url: "https://fb-shop-webview.onrender.com",
+      success_url: "https://www.facebook.com",
     }),
   };
 
@@ -201,51 +202,48 @@ const fetchCheckoutUrl = async () => {
   }
 };
 
-
-
-
-
 // Handles messaging_postbacks events
 let handlePostback = async (sender_psid, received_postback) => {
-    let response;
+  let response;
 
-    // Get the payload for the postback
-    let payload = received_postback.payload;
+  // Get the payload for the postback
+  let payload = received_postback.payload;
 
-    // Set the response based on the postback payload
-    if (payload === 'yes') {
-        response = { "text": "Thanks!" }
-    } else if (payload === 'no') {
-        response = { "text": "Oops, try sending another image." }
-    } else if (payload === 'Order Now') {
-     
-        // Fetch the checkout URL asynchronously
-        const checkoutUrl = await fetchCheckoutUrl();
+  // Set the response based on the postback payload
+  if (payload === 'yes') {
+    response = { "text": "Thanks!" }
+  } else if (payload === 'no') {
+    response = { "text": "Oops, try sending another image." }
+  } else if (payload === 'Order Now') {
 
-              response = {
-                       "attachment":{
-                           "type":"template",
-                           "payload":{
-                               "template_type":"button",
-                               "text":"What do you want to do next?",
-                               "buttons":[
-                                    {
-                                     "type":"web_url",
-                                     //"url": WEBVIEW_URL + "/" + sender_psid,
-                                       "url": checkoutUrl,
-                                     "title":"Order Now",
-                                     "messenger_extensions": true,
-                                     "webview_height_ratio": "tall",
-                                            },
-                                        ]
-                                  }
-                       }
-             }; 
-    
-    }
-    // Send the message to acknowledge the postback
-    callSendAPI(sender_psid, response);
+    // Fetch the checkout URL asynchronously
+    const checkoutUrl = await fetchCheckoutUrl();
+
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "button",
+          "text": "What do you want to do next?",
+          "buttons": [
+            {
+              "type": "web_url",
+              "url": checkoutUrl, // Use the fetched checkout URL here
+              "title": "Order Now",
+              "messenger_extensions": true,
+              "webview_height_ratio": "tall",
+            },
+          ],
+        },
+      },
+    };
+  }
+
+  // Send the message to acknowledge the postback
+  callSendAPI(sender_psid, response);
 };
+
+
 
 // Sends response messages via the Send API
 let callSendAPI = (sender_psid, response) => {
