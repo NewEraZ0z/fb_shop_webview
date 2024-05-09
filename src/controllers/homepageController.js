@@ -3,7 +3,7 @@ require("dotenv").config();
 const request = require("request");
 
 //const { fetchCheckoutUrl } = require('../chargilypay.js');
-import fetchCheckoutUrl from '../chargilypay.js';
+// import fetchCheckoutUrl from '../chargilypay.js';
 
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
@@ -162,10 +162,17 @@ let handlePostback = async (sender_psid, received_postback) => {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'Order Now') {
 
-         try {
-      const checkoutUrl = await fetchCheckoutUrl();
+     try {
+ const options = {
+         method: 'POST',
+         headers: {
+         Authorization: 'Bearer test_sk_nu2KF22Dc60fD6LdkIoAwlp3WgfCj5rqn15atqeB', 'Content-Type': 'application/json'},
+         body: '{"amount":2000,"currency":"dzd","payment_method":"edahabia","success_url":"https://fb-shop-webview.onrender.com"}' // Truncated for brevity
+};
 
-      if (checkoutUrl) {
+      const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
+      const data = await response.json();
+      if (data.checkout_url) {
               response = {
                        "attachment":{
                            "type":"template",
@@ -175,7 +182,7 @@ let handlePostback = async (sender_psid, received_postback) => {
                                "buttons":[
                                     {
                                      "type":"web_url",
-                                     "url": checkoutUrl,
+                                     "url": data.checkout_url,
                                      "title":"Order Now",
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
@@ -185,20 +192,13 @@ let handlePostback = async (sender_psid, received_postback) => {
                          }
                      }; 
                  }  else {
-        console.error("Error generating checkout URL");
-        // Handle the case where checkoutUrl is not available (optional)
-        response = {
-          "text": "Sorry, there was an issue generating the checkout URL. Please try again later."
-        };
+        console.error('Checkout URL not found in response');
       }
     } catch (error) {
-      console.error("Error fetching checkout URL:", error);
-      // Handle errors appropriately (e.g., send an error message)
-      response = {
-        "text": "An unexpected error occurred. Please try again later."
-        };
-       }
-      }
+      console.error('Error fetching checkout URL:', error);
+      // Handle errors appropriately
+    }
+  }
      // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
 };
