@@ -23,7 +23,7 @@ fetch('https://pay.chargily.net/test/api/v2/checkouts', options)
 
 // **Optional (for using in another file):**
 // Let's say you want to export the checkout URL as a Promise:
-export default fetchCheckoutUrl = async () => {
+  module.exports = fetchCheckoutUrl = async () => {
   const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
   const data = await response.json();
   if (data.checkout_url) {
