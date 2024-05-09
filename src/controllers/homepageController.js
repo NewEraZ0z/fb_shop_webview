@@ -2,7 +2,8 @@ require("dotenv").config();
 //import request from "request";
 const request = require("request");
 
-const { fetchCheckoutUrl } = require('../chargilypay.js');
+//const { fetchCheckoutUrl } = require('../chargilypay.js');
+import fetchCheckoutUrl from '../chargilypay.js';
 
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
