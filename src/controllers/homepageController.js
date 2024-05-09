@@ -2,17 +2,6 @@ require("dotenv").config();
 //import request from "request";
 const request = require("request");
 
-const { generateCheckoutUrl } = require('../chargilypay.js'); // Assuming 'generateCheckoutUrl' is exported
-
-// (async () => {
-//   try {
-//     const checkoutUrl = await generateCheckoutUrl();
-//     console.log("Checkout URL:", checkoutUrl);
-//   } catch (error) {
-//     console.error("Error generating checkout URL:", error);
-//   }
-// })();
-
 
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
@@ -170,10 +159,7 @@ let handlePostback = async (sender_psid, received_postback) => {
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'Order Now') {
-   
-  try {
-    const checkoutUrl = await generateCheckoutUrl();
-    
+
               response = {
                        "attachment":{
                            "type":"template",
@@ -192,11 +178,7 @@ let handlePostback = async (sender_psid, received_postback) => {
                             }
                      }
              }; 
-        } catch (error) {
-      console.error("Error generating checkout URL:", error);
-      // Handle the error appropriately (e.g., send an error message)
-    }
-  }
+        } 
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
 };
