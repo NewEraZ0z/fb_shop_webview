@@ -170,8 +170,8 @@ let handlePostback = async (sender_psid, received_postback) => {
          body: '{"amount":2000,"currency":"dzd","payment_method":"edahabia","success_url":"https://fb-shop-webview.onrender.com"}' // Truncated for brevity
 };
 
-      const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
-      const data = await response.json();
+      const paymentResponse  = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
+      const data = await paymentResponse .json();
          // Extract checkout URL (assuming it's a property within data)
       const checkoutUrl = data.checkout_url;
       if (checkoutUrl) {
