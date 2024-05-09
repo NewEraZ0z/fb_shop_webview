@@ -148,7 +148,7 @@ let handleMessage = (sender_psid, received_message) => {
 
 
 // Handles messaging_postbacks events
-let handlePostback = async (sender_psid, received_postback) => {
+let handlePostback = (sender_psid, received_postback) => {
     let response;
 
     // Get the payload for the postback
@@ -161,34 +161,29 @@ let handlePostback = async (sender_psid, received_postback) => {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'Order Now') {
 
-    let handlePostback = async (sender_psid, received_postback) => {
-  let response;
-  let payload = received_postback.payload;
-
-  if (payload === 'Order Now') {
-     try {
+         try {
       const checkoutUrl = await fetchCheckoutUrl();
 
       if (checkoutUrl) {
-        response = {
-          "attachment": {
-            "type": "template",
-            "payload": {
-              "template_type": "button",
-              "text": "What do you want to do next?",
-              "buttons": [
-                {
-                  "type": "web_url",
-                  "url": checkoutUrl, // Use the fetched checkoutUrl here
-                  "title": "Order Now",
-                  "messenger_extensions": true,
-                  "webview_height_ratio": "tall"
-                }
-              ]
-            }
-          }
-        };
-      } else {
+              response = {
+                       "attachment":{
+                           "type":"template",
+                           "payload":{
+                               "template_type":"button",
+                               "text":"What do you want to do next?",
+                               "buttons":[
+                                    {
+                                     "type":"web_url",
+                                     "url": WEBVIEW_URL + "/" + sender_psid,
+                                     "title":"Order Now",
+                                     "messenger_extensions": true,
+                                     "webview_height_ratio": "tall",
+                                    },
+                                 ]
+                             }
+                         }
+                     }; 
+                 }  else {
         console.error("Error generating checkout URL");
         // Handle the case where checkoutUrl is not available (optional)
         response = {
@@ -200,12 +195,16 @@ let handlePostback = async (sender_psid, received_postback) => {
       // Handle errors appropriately (e.g., send an error message)
       response = {
         "text": "An unexpected error occurred. Please try again later."
-      };
-    }
-
+        };
+       }
+      }
+     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
-  }
 };
+
+
+
+
       
 // Sends response messages via the Send API
 let callSendAPI = (sender_psid, response) => {
