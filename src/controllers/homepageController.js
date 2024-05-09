@@ -174,6 +174,7 @@ let handlePostback = async (sender_psid, received_postback) => {
       const data = await paymentResponse .json();
          // Extract checkout URL (assuming it's a property within data)
       const checkoutUrl = data.checkout_url;
+         console.log(checkoutUrl);
       if (checkoutUrl) {
               response = {
                        "attachment":{
