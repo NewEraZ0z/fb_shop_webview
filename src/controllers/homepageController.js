@@ -172,7 +172,9 @@ let handlePostback = async (sender_psid, received_postback) => {
 
       const response = await fetch('https://pay.chargily.net/test/api/v2/checkouts', options);
       const data = await response.json();
-      if (data.checkout_url) {
+         // Extract checkout URL (assuming it's a property within data)
+      const checkoutUrl = data.checkout_url;
+      if (checkoutUrl) {
               response = {
                        "attachment":{
                            "type":"template",
@@ -182,7 +184,7 @@ let handlePostback = async (sender_psid, received_postback) => {
                                "buttons":[
                                     {
                                      "type":"web_url",
-                                     "url": data.checkout_url,
+                                     "url": checkoutUrl,
                                      "title":"Order Now",
                                      "messenger_extensions": true,
                                      "webview_height_ratio": "tall",
